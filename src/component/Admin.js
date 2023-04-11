@@ -28,6 +28,7 @@ function Admin() {
                                     </p>
                                     <p className="h6 m-3 ">
                                         UID : <span>{uid}</span>
+                                        
                                     </p>
                                     <p className="h6 m-3 ">
                                         Category : <span> {category}</span>
