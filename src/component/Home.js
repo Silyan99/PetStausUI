@@ -3,7 +3,7 @@ import Footer from "./Footer";
 function Home(props) {
   return (
     <>
-      <div
+      {/* <div
         id="carouselExampleFade"
         className="mt-5 carousel slide carousel-fade "
         data-bs-ride="carousel"
@@ -74,6 +74,18 @@ function Home(props) {
           ></span>
           <span className="visually-hidden">Next</span>
         </button>
+      </div> */}
+
+      <div>
+      <div className="card text-bg-dark border-0 rounded-0">
+        <img src="./images/home-top-bg5.jpg" className="card-img rounded-0 border-0" alt="..." />
+        <div className="card-img-overlay mt-5 rounded-0">
+          <h5 className="text-dark display-2 my-3 p-5 fw-normal text-start">Pet Stays</h5>
+          <p className=" text-dark display-5 fw-light px-5 pt-3 text-start">We'll <span className="text-danger">care</span> for your pets </p>
+          <p className=" text-dark display-5 fw-light px-5 text-start">the same way you <span className="text-danger">do.</span></p>
+          
+        </div>
+      </div>
       </div>
 
       <div className="container marketing my-5 py-5">

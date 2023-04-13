@@ -9,6 +9,11 @@ import Login from "./component/Login";
 import User from "./component/User";
 import Payment from "./component/Payment";
 import PetDetails from "./component/PetDetails";
+import Appointment from "./component/Appointment";
+import MyRequests from "./component/MyRequests";
+import PendingRequest from "./component/PendingRequest";
+import AddOffTimings from "./component/AddOffTimings";
+
 function App() {
   return (
     <div className="App">
@@ -23,6 +28,11 @@ function App() {
           <Route path="/user" element={<User />}></Route>
           <Route path="/payment" element={<Payment />}></Route>
           <Route path="/petdetails" element={<PetDetails />}></Route>
+          <Route path="/appointment" element={<Appointment/>}></Route>
+          <Route path="/myrequests" element={<MyRequests/>}></Route>
+          <Route path="/pendingrequest" element={<PendingRequest/>}></Route>
+          <Route path="/addofftimings" element={<AddOffTimings/>}></Route>
+          
         </Routes>
       </BrowserRouter>
     </div>

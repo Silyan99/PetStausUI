@@ -41,7 +41,7 @@
 }
 
 .navbar-text img:hover {
-  filter: opacity(0.5) drop-shadow(0 0 0 rgb(0, 72, 255)) saturate(7);
+  filter: opacity(0.5) drop-shadow(0 0 0 rgb(255, 0, 0)) saturate(7);
 }
 
 .close {
@@ -53,9 +53,9 @@
   filter: opacity(0.5) drop-shadow(0 0 0 rgb(255, 0, 0)) saturate(7);
 }
 
-.modal-footer a{
- 
- cursor: pointer;
+.modal-footer a {
+
+  cursor: pointer;
 }
 
 .input-box input {
@@ -80,6 +80,7 @@
   border: 0;
   transform: scale(1);
 }
+
 s .pet-card img {
   min-width: 150px;
   height: 250px;
@@ -133,16 +134,16 @@ s .pet-card img {
   stroke: #32a932;
 }
 
-#cbx:checked + .check svg {
+#cbx:checked+.check svg {
   stroke: #32a932;
 }
 
-#cbx:checked + .check svg path {
+#cbx:checked+.check svg path {
   stroke-dashoffset: 60;
   transition: all 0.3s linear;
 }
 
-#cbx:checked + .check svg polyline {
+#cbx:checked+.check svg polyline {
   stroke-dashoffset: 42;
   transition: all 0.2s linear;
   transition-delay: 0.15s;
@@ -165,27 +166,13 @@ s .pet-card img {
 }
 
 .profile-info h1 {
-  font-size: 36px;
+
   margin-bottom: 10px;
 }
 
 .profile-info p {
-  font-size: 18px;
+  font-size: 15px;
   margin-bottom: 20px;
-}
-
-.profile-info ul {
-  list-style-type: none;
-}
-
-.profile-info ul li {
-  margin-bottom: 10px;
-}
-
-.profile-info li strong {
-  display: inline-block;
-  
- 
 }
 
 .pet-radio-inputs {
@@ -222,17 +209,17 @@ s .pet-card img {
   transition: all 0.15s ease-in-out;
 }
 
-.pet-radio-inputs .pet-radio input:checked + .name {
+.pet-radio-inputs .pet-radio input:checked+.name {
   background-color: #fff;
   font-weight: 600;
 }
 
-#cbx:checked + .check svg path {
+#cbx:checked+.check svg path {
   stroke-dashoffset: 60;
   transition: all 0.3s linear;
 }
 
-#cbx:checked + .check svg polyline {
+#cbx:checked+.check svg polyline {
   stroke-dashoffset: 42;
   transition: all 0.2s linear;
   transition-delay: 0.15s;
@@ -269,18 +256,23 @@ s .pet-card img {
   cursor: pointer;
   /* border-radius: 50%; */
 }
+
 .ficon1 {
   height: 25px;
 }
+
 .ficon2 {
   height: 25px;
 }
+
 .ficon1:hover {
   filter: opacity(0.5) drop-shadow(0 0 0 rgb(221, 42, 123)) saturate(5);
 }
+
 .ficon2:hover {
   filter: opacity(0.5) drop-shadow(0 0 0 rgb(0, 172, 238)) saturate(5);
 }
+
 .ficon3:hover {
   filter: opacity(0.5) drop-shadow(0 0 0 rgb(66 103 178)) saturate(5);
 }
@@ -289,13 +281,69 @@ s .pet-card img {
   max-height: 500px;
   max-width: 500px;
 
-  
+
 }
-.pet-image img{
+
+.pet-image img {
   filter: grayscale(0);
   transition: 0.5s ease;
   cursor: pointer;
 }
-.pet-image img:hover{
+
+.pet-image img:hover {
   filter: grayscale(1);
+}
+
+.table-box {
+  background: rgb(255, 255, 255);
+  box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
+}
+
+.table-icon {
+  display: flex;
+  justify-content: start;
+}
+
+.table-icon img {
+  width: 25px;
+  cursor: pointer;
+}
+
+.table-icon img:hover {
+  filter: opacity(0.5) drop-shadow(0 0 0 rgb(34, 107, 255)) saturate(5);
+}
+
+.scroll {
+  margin: 4px, 4px;
+  padding: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+
+.table-pic {
+  width: 60px;
+  height: 60px;
+}
+
+.table-pic img {
+  width: 60px;
+  height: 60px;
+  border-radius: 20%;
+  filter: grayscale(0);
+  transition: 0.5s ease;
+  cursor: pointer;
+}
+
+.table-pic img:hover {
+  filter: grayscale(1);
+}
+
+.admin-table tr {
+  height: 60px;
+}
+
+.card-img-overlay{
+  background: #00000000;
+  backdrop-filter: grayscale(1)  ;
 }

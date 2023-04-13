@@ -3,8 +3,9 @@ import PetData from "../sharedData/PetData";
 
 function Admin() {
     return (
-        <div>
-            <p className="text-start m-5 px-5 pt-5 display-5">Pet Requests </p>
+        <div className="container">
+            <p className="my-5 py-5 display-6 text-start">Pendding <span className="text-danger"> Requests</span></p>
+
             {PetData.map(({ img, petname, uid, category, breed, color, gender, vaccinated, age, address, pickup, details }) => {
                 return (
                     <div className="container d-flex flex-row flex-wrap justify-content-center mt-5">
@@ -28,7 +29,7 @@ function Admin() {
                                     </p>
                                     <p className="h6 m-3 ">
                                         UID : <span>{uid}</span>
-                                        
+
                                     </p>
                                     <p className="h6 m-3 ">
                                         Category : <span> {category}</span>
@@ -62,9 +63,20 @@ function Admin() {
                                         <button type="button" className="btn btn-outline-success mx-1 ">
                                             Approve
                                         </button>
-                                        <button type="button" className="btn btn-outline-danger mx-1">
+                                        <button type="button" className="btn btn-outline-danger dropdown-toggle mx-1"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
                                             Reject
                                         </button>
+                                        <div className="dropdown-menu">
+                                            <div className="px-3">
+                                                <label for="exampleFormControlTextarea1" class="form-label">Leave a Comment</label>
+                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                <div className="text-end">
+                                                    <button type="button" class="btn btn-primary btn-sm my-2 w-100 ">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
                                         <button type="button" className="btn btn-outline-primary dropdown-toggle mx-1"
                                             data-bs-toggle="dropdown" aria-expanded="false">
                                             Pending
@@ -74,7 +86,7 @@ function Admin() {
                                                 <label for="exampleFormControlTextarea1" class="form-label">Leave a Comment</label>
                                                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
                                                 <div className="text-end">
-                                                <button type="button" class="btn btn-primary btn-sm my-2 w-100 ">Submit</button>
+                                                    <button type="button" class="btn btn-primary btn-sm my-2 w-100 ">Submit</button>
                                                 </div>
                                             </div>
                                         </div>

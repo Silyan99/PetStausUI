@@ -2,7 +2,7 @@ import React from "react";
 function PetDetails() {
     return (
         <>
-            <p className="text-start m-5 px-5 pt-5 display-5">Pet-Details</p>
+            <p className="text-start m-5 px-5 pt-5 display-5">Pet <span className="text-danger">Details</span></p>
 
 
             <div className="container d-flex flex-row flex-wrap justify-content-center">

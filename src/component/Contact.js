@@ -5,7 +5,7 @@ function Contact() {
     <div>
       <div className="container mt-5 py-5 text-start">
         <form className="" novalidate="">
-          <h4 className="mb-5 display-5 mb-5">Contact-Us</h4>
+          <h4 className="mb-5 display-5 mb-5">Contact <span className="text-danger">Us</span></h4>
 
           <div className="row gy-3  my-5">
             <div className="col-md-7">
