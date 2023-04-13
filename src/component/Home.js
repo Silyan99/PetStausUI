@@ -77,15 +77,16 @@ function Home(props) {
       </div> */}
 
       <div>
-      <div className="card text-bg-dark border-0 rounded-0">
-        <img src="./images/home-top-bg5.jpg" className="card-img rounded-0 border-0" alt="..." />
-        <div className="card-img-overlay mt-5 rounded-0">
-          <h5 className="text-dark display-2 my-3 p-5 fw-normal text-start">Pet Stays</h5>
-          <p className=" text-dark display-5 fw-light px-5 pt-3 text-start">We'll <span className="text-danger">care</span> for your pets </p>
-          <p className=" text-dark display-5 fw-light px-5 text-start">the same way you <span className="text-danger">do.</span></p>
-          
+        <div className="card text-bg-dark border-0 rounded-0">
+          <img src="./images/home-top-bg2.jpg" className="card-img rounded-0 border-0" alt="..." />
+          <div className="card-img-overlay mt-5 rounded-0">
+            <h5 className="text-light display-2 my-3 p-5 fw-normal text-start">Pet Stays</h5>
+            <div className="d-none d-sm-none d-md-none d-lg-block">
+              <p className=" text-light display-5 fw-light px-5 pt-3 text-start">We'll <span className="text-danger">care</span> for your pets </p>
+              <p className=" text-light display-5 fw-light px-5 text-start">the same way you <span className="text-danger">do.</span></p>
+            </div>
+          </div>
         </div>
-      </div>
       </div>
 
       <div className="container marketing my-5 py-5">
@@ -181,7 +182,7 @@ function Home(props) {
 
         <hr className="featurette-divider mt-5 py-2" />
 
-        <div className="row featurette text-start">
+        <div className="row featurette text-start mb-5">
           <div className="col-md-7 my-3">
             <h2 className="display-6">
               Pet Stays Safety & Wellness{" "}
@@ -201,6 +202,19 @@ function Home(props) {
               srcset=""
               style={{ width: "30vw" }}
             />
+          </div>
+        </div>
+      </div>
+
+      <div className="mt-5">
+        <div className="card text-bg-dark border-0 rounded-0">
+          <img src="./images/home-top-bg7.jpg" className="card-img rounded-0 border-0" alt="..." />
+          <div className="card-img-overlay mt-5 rounded-0">
+            <h5 className="text-dark display-2 my-3 p-5 fw-normal text-start">Pet Stays</h5>
+            <div className="d-none d-sm-none d-md-none d-lg-none d-xl-block">
+              <p className=" text-dark display-5 fw-light px-5 pt-3 text-start">Our pets' lives revolve <span className="text-danger">around us.</span> Let's give</p>
+              <p className=" text-dark display-5 fw-light px-5 text-start">back to them as much as <span className="text-danger"> they give us.</span></p>
+            </div>
           </div>
         </div>
       </div>

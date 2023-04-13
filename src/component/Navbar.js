@@ -38,6 +38,7 @@ function Navbar(props) {
                   Home
                 </Link>
               </li>
+
               <li className="nav-item">
                 <Link
                   className="nav-link text-center active "
@@ -55,6 +56,15 @@ function Navbar(props) {
                   to="/contact"
                 >
                   Contact-Us
+                </Link>
+              </li>
+              <li className="nav-item ">
+                <Link
+                  className="nav-link text-center active text-danger"
+                  aria-current="page"
+                  to="/"
+                >
+                  Log-Out
                 </Link>
               </li>
             </ul>

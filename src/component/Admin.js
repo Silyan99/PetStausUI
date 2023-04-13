@@ -4,7 +4,7 @@ import PetData from "../sharedData/PetData";
 function Admin() {
     return (
         <div className="container">
-            <p className="my-5 py-5 display-6 text-start">Pendding <span className="text-danger"> Requests</span></p>
+            <p className="my-5 py-5 display-6 text-start">Pending <span className="text-danger"> Requests</span></p>
 
             {PetData.map(({ img, petname, uid, category, breed, color, gender, vaccinated, age, address, pickup, details }) => {
                 return (
