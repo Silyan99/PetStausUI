@@ -63,9 +63,11 @@ function MyRequests() {
           </table>
         </div>
         <div className="text-end my-5">
+        <Link to={"/Appointment"}>
           <button className="btn btn-outline-success px-4 mx-3">
             Add new request
           </button>
+          </Link>
           <button className="btn btn-outline-primary px-4 " data-bs-toggle="modal" data-bs-target="#exampleModal">
             Next
           </button>
