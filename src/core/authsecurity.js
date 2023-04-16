@@ -48,7 +48,7 @@ const logout = () => {
 
 
 const loggedUser = (function () {
-  debugger
+
   let userDetails = {
     IsLoggedIn:
       localStorage.getItem(TOKEN_KEY) !== undefined &&
