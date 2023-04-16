@@ -1,5 +1,5 @@
 const config = {
-  BaseAPI: 'https://3.27.10.229/api/api',
+  BaseAPI: 'https://3.27.10.229/api',
   ToastConfig: {
     position: "top-right",
     autoClose: 3500,
