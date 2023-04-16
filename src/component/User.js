@@ -13,7 +13,7 @@ function User() {
       <div className="container mt-5 ">
         <div className="profile my-5">
           <div className="profile-pic">
-            <img src="./images/user-dp.png" alt="Profile Picture" />
+            <img src="../images/user-dp.png" alt="Profile" />
           </div>
           <div className="profile-info text-start mx-4">
             <h1 className="">John Wick</h1>
@@ -29,7 +29,7 @@ function User() {
           </div>
         </div>
         <div className="container text-start">
-          <Link to={"/appointment"}>
+          <Link to={"/customer/appointment"}>
             <button
               className="mx-5 px-5 py-2 btn btn-outline-primary my-3"
               type="button"

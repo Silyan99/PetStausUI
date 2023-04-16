@@ -58,7 +58,7 @@ function Appointment() {
           </div>
 
           <div className="form-check col-md-6 my-3 px-1 d-flex flex-row align-items-center">
-            {/* <input class="form-check-input mx-1" type="checkbox" value="" id="flexCheckDefault"></input> */}
+            {/* <input className="form-check-input mx-1" type="checkbox" value="" id="flexCheckDefault"></input> */}
             <label className="form-check-label " htmlFor="flexCheckDefault">
               Vaccinated
             </label>
@@ -167,12 +167,12 @@ function Appointment() {
               Upload
             </button>
           </div>
-          <div class="my-3">
-            <label for="exampleFormControlTextarea1" class="form-label">
+          <div className="my-3">
+            <label for="exampleFormControlTextarea1" className="form-label">
               Pet Details
             </label>
             <textarea
-              class="form-control"
+              className="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
             ></textarea>

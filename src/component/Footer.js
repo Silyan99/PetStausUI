@@ -19,21 +19,21 @@ function Footer(props) {
             <a className="text-muted" href="#">
               <img
                 className="ficon ficon1"
-                src="./images/instagram.png"
+                src="../images/instagram.png"
                 alt=""
               />
             </a>
           </li>
           <li className="ms-3">
             <a className="text-muted" href="#">
-              <img className="ficon ficon2" src="./images/twitter.png" alt="" />
+              <img className="ficon ficon2" src="../images/twitter.png" alt="" />
             </a>
           </li>
           <li className="ms-3">
             <a className="text-muted" href="#">
               <img
                 className="ficon ficon3"
-                src="./images/facebook.png"
+                src="../images/facebook.png"
                 alt=""
               />
             </a>

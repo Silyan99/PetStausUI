@@ -38,6 +38,10 @@ function SignUp() {
       });
   };
 
+  const cancelHanlder = async (e) =>{
+    window.location.reload();
+  }
+
   useEffect(()=>{
     setName("");
     setEmail("");
@@ -92,18 +96,25 @@ function SignUp() {
             <div className="d-grid gap-2 col-12 mx-auto mt-4">
               <button
                 className="btn btn-primary"
-                type="submit"
+                type="button"
                 onClick={submitHandler}
               >
                 Submit
+              </button>
+              <button
+                className="btn btn-primary"
+                type="button"
+                onClick={cancelHanlder}
+              >
+                Cancel
               </button>
             </div>
 
             <div className=" my-3 text-start">
               <p>
-                Have an account
+                Already have an account
                 <Link className="mx-2 text-decoration-none" to={"/login"}>
-                  log-in
+                  Login
                 </Link>
               </p>
             </div>

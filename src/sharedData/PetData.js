@@ -1,7 +1,7 @@
 export default [
   
   {
-    img: "./images/Sphynxcat500x500.jpg",
+    img: "Sphynxcat500x500.jpg",
     petname: "Keo",
     uid: "20730392",
     category: "Cat",

@@ -4,12 +4,12 @@ function MyRequests() {
   return (
     <>
       <div className="container">
-        <p className="my-5 py-5 display-6 text-start">
+        <p className="my-3 py-5 display-6">
           My <span className="text-danger">Requests</span>
         </p>
-
+      <hr/>
         <div className="table-box p-5 rounded-3 scroll">
-          <table class="table table-hover text-start">
+          <table className="table table-hover text-start">
             <thead>
               <tr>
                 <th className="fw-normal h5 pb-5 px-3" scope="col">
@@ -54,7 +54,41 @@ function MyRequests() {
                 <td className="py-4 px-3">
                   <Link to={"/petdetails"}>
                     <div className="table-icon">
-                      <img src="./images/view.png" alt="view" />
+                      <img src="../images/view.png" alt="view" />
+                    </div>
+                  </Link>
+                </td>
+              </tr>
+              <tr>
+                <td className="py-4 px-3">2</td>
+                <td className="py-4 px-3">5465</td>
+                <td className="py-4 px-3">Shiro</td>
+                <td className="py-4 px-3">John Wick</td>
+                <td className="py-4 px-3">3 Year</td>
+                <td className="py-4 px-3">164 St No. 9</td>
+                <td className="py-4 px-3 text-primary">Pending</td>
+                <td className="py-4 px-3">-</td>
+                <td className="py-4 px-3">
+                  <Link to={"/petdetails"}>
+                    <div className="table-icon">
+                      <img src="../images/view.png" alt="view" />
+                    </div>
+                  </Link>
+                </td>
+              </tr>
+              <tr>
+                <td className="py-4 px-3">3</td>
+                <td className="py-4 px-3">5465</td>
+                <td className="py-4 px-3">Shiro</td>
+                <td className="py-4 px-3">John Wick</td>
+                <td className="py-4 px-3">3 Year</td>
+                <td className="py-4 px-3">164 St No. 9</td>
+                <td className="py-4 px-3 text-primary">Pending</td>
+                <td className="py-4 px-3">-</td>
+                <td className="py-4 px-3">
+                  <Link to={"/petdetails"}>
+                    <div className="table-icon">
+                      <img src="../images/view.png" alt="view" />
                     </div>
                   </Link>
                 </td>

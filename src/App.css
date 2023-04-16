@@ -13,6 +13,10 @@
   }
 }
 
+.no-link-underline{
+  text-decoration: none;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -28,6 +32,25 @@
   color: #61dafb;
 }
 
+[data-initials]:before {
+  background: #099bdd;
+  color: white;
+  opacity: 1; 
+  content: attr(data-initials); 
+  display: inline-block; 
+  font-weight: 600; 
+  border-radius: 50%; 
+  vertical-align: middle; 
+  margin-right: 0.5em; 
+  width: 50px; 
+  height: 50px; 
+  line-height: 50px; 
+  text-align: center; 
+  text-transform: uppercase;
+  margin-left: 5px;
+  font-size: 1.5em;
+  }
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +59,4 @@
     transform: rotate(360deg);
   }
 }
+

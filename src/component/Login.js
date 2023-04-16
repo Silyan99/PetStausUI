@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import * as service from "../core/service/service";
 import UrlConstant from "../constants/UrlConstant";
-import { useNavigate } from 'react-router-dom';
-import base64 from 'base-64';
+import { useNavigate } from "react-router-dom";
+import base64 from "base-64";
+import { toast } from "react-toastify";
+import { authenticate, loggedUser } from "../core/authsecurity";
+import config from "../core/config/config";
 
 function Login() {
   const navigate = useNavigate();
@@ -14,7 +17,6 @@ function Login() {
   const [tab, setTab] = useState("0");
 
   const clickHandler = async (e) => {
-    e.preventDefault();
     let data = {
       Email: "",
       Password: "",
@@ -26,21 +28,43 @@ function Login() {
       data.Email = adminEmail;
       data.Password = base64.encode(adminPassword);
     }
+    if (data.Email === "" || data.Password === "") {
+      toast.error(
+        "Email and password are required fields.",
+        config.ToastConfig
+      );
+      return;
+    }
     service
       .post(UrlConstant.Login, data)
       .then((resp) => {
-        if(resp.statusText === "OK")
-        {
-          setEmail("");
-          setPassword("");
-          setAdminEmail("");
-          setAdminPassword("");
-          localStorage.setItem("token",resp.data.Token);
-          return navigate("/");
+        if (resp.status === 200) {
+          toast.success("Login Successful!", config.ToastConfig);
+          authenticate(resp.data);
+          let redirectURL = "/customer/myrequests";
+          if (loggedUser.IsAdmin) {
+            redirectURL = "/admin/pendingrequest";
+          }
+          const loginRedirect = new Promise((resolve) =>
+            setTimeout(() => {
+              window.location.href = redirectURL;
+            }, 3500)
+          );
+          setTimeout(() => {
+            toast.promise(loginRedirect, {
+              pending: "Redirecting you to Home page",
+            });
+          }, 1000);
+        } else {
+          toast("Unable to login. Please try again.");
         }
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Invalid username or password", config.ToastConfig);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2500);
       });
   };
 
@@ -54,7 +78,8 @@ function Login() {
   return (
     <div className="d-flex justify-content-center align-items-center h-100 my-5">
       <div className="col-md-4">
-        <div className="display-6 my-5 text-center  ">log-In</div>
+        <div className="display-6 my-5 text-center  ">Login</div>
+        <hr></hr>
         <form className="m-5">
           <div className="input-box">
             <ul className="nav nav-tabs mb-5" id="myTab" role="tablist">
@@ -70,7 +95,7 @@ function Login() {
                   aria-selected="true"
                   onClick={() => setTab("0")}
                 >
-                  User
+                  Customer
                 </button>
               </li>
               <li className="nav-item" role="presentation">
@@ -139,19 +164,30 @@ function Login() {
             <div className="d-grid gap-2 col-12 mx-auto mt-4">
               <button
                 className="btn btn-primary"
-                onClick={clickHandler}
-                type="submit"
+                onClick={() => clickHandler()}
+                type="button"
               >
-                Log-In
+                Login
+              </button>
+              <button
+                className="btn btn-primary"
+                onClick={() => {
+                  window.location.reload();
+                }}
+                type="button"
+              >
+                Cancel
               </button>
             </div>
 
-            <Link
-              className="mx-2 text-decoration-none d-grid gap-2 col-12 mx-auto mt-4"
-              to={"/signup"}
-            >
-              <button className="btn btn-primary text-light">Back</button>
-            </Link>
+            <div className=" my-3 text-start">
+              <p>
+                Need an account?
+                <Link className="mx-2 text-decoration-none" to={"/signup"}>
+                  Signup
+                </Link>
+              </p>
+            </div>
           </div>
         </form>
       </div>

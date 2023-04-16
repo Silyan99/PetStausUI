@@ -1,15 +1,14 @@
 import React from "react";
-import { Link } from "react-router-dom";
 function AddOffTimings() {
     return (
         <>
             <div className="container">
-                <p className="my-5 py-5 display-6 text-start">Add <span className="text-danger"> Off Timings</span></p>
+                <p className="my-4 py-5 display-6">Add <span className="text-danger"> Off Timings</span></p>
+                <hr></hr>
                 <div className="col-md-12 table-box d-flex flex-row justify-content-around flex-wrap">
-                    <div className="col-md-3 ">
+                    <div className="col-md-3">
                         <div className="col-md-12 ">
-                            <label htmlFor="addofftime " className="mx-0 my-5">
-                                {" "}
+                            <label htmlFor="addofftime " className="mx-0 my-3">
                                 Select Date :
                             </label>
                             <input
@@ -62,13 +61,19 @@ function AddOffTimings() {
                                 <button className="btn btn-outline-success px-5">
                                     Save
                                 </button>
+                                &nbsp;&nbsp;
+                                <button className="btn btn-outline-primary px-5" onClick={()=>{
+                                    window.history.back();
+                                }}>
+                                    Cancel
+                                </button>
                             </div>
 
                         </div>
                     </div>
                     <div className="col-md-5 m-5 p-5">
                         <p className="mb-5 fs-4 text-start">Off  Times</p>
-                        <table class="table py-5">
+                        <table className="table py-5">
                             <thead >
                                 <tr className="" >
                                     <td scope="col" className="p-3">Date</td>

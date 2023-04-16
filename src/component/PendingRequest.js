@@ -4,12 +4,12 @@ function PendingRequest() {
   return (
     <>
       <div className="container">
-        <p className="my-5 py-5 display-6 text-start">
-          Pending <span className="text-danger"> Requests</span>
+        <p className="my-4 py-5 display-6">
+          Pending <span className="text-danger">Requests</span>
         </p>
-
+        <hr></hr>
         <div className="table-box p-5 rounded-3 scroll">
-          <table class="table table-hover text-start align-middle">
+          <table className="table table-hover text-start align-middle">
             <thead className="admin-table">
               <tr>
                 <th className="fw-normal h5 pb-5 px-3" scope="col">
@@ -45,7 +45,7 @@ function PendingRequest() {
               <tr>
                 <td className="py-4 px-3">
                   <div className="table-pic">
-                    <img src="./images/200-5.jpg" alt="view" />
+                    <img src="../images/200-5.jpg" alt="view" />
                   </div>
                 </td>
                 <td className="py-4 px-3">5465</td>
@@ -56,9 +56,9 @@ function PendingRequest() {
                 <td className="py-4 px-3 text-primary">Pending</td>
                 <td className="py-4 px-3">-</td>
                 <td className="py-4 px-3">
-                  <Link to={"/admin"}>
+                  <Link to={"/admin/petdetails"}>
                     <div className="table-icon">
-                      <img src="./images/view.png" alt="view" />
+                      <img src="../images/view.png" alt="view" />
                     </div>
                   </Link>
                 </td>

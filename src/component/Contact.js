@@ -1,6 +1,16 @@
 import React from "react";
+import { toast } from "react-toastify";
+import config from "../core/config/config";
+import { FormsOperations } from "../core/interactiveforms";
 
 function Contact() {
+
+  const SaveClickHanlder =()=>{
+    FormsOperations.clearForm(document.forms[0]);
+    toast.success("Your message sent. We will get back to you on this.", config.ToastConfig);
+    
+  }
+
   return (
     <div>
       <div className="container mt-5 py-5 text-start">
@@ -66,8 +76,14 @@ function Contact() {
           </div>
 
           <div className="my-4">
-            <button className="w-50 btn btn-primary" type="submit">
+            <button className="btn btn-primary" type="button" onClick={SaveClickHanlder}>
               Submit
+            </button>
+            &nbsp;&nbsp;
+            <button className="btn btn-primary" type="button" onClick={()=>{
+              window.location.reload();
+            }}>
+              Cancel
             </button>
           </div>
         </form>

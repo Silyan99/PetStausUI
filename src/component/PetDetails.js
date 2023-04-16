@@ -1,20 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 function PetDetails() {
     return (
         <>
-            <p className="text-start m-5 px-5 pt-5 display-5">Pet <span className="text-danger">Details</span></p>
-
-
+        <div className="container">
+            <p className="m-5 px-5 pt-5 display-5">Pet <span className="text-danger">Details</span></p>
+            <hr></hr>
             <div className="container d-flex flex-row flex-wrap justify-content-center">
-
+           
                 <div
-                    className="container col-md-11 mx-2 my-5  d-flex flex-row flex-wrap justify-content-evenly mt-5"
+                    className="container col-md-11 mx-2 my-4 d-flex flex-row flex-wrap justify-content-evenly mt-5"
                     style={{ maxWidth: "80vw" }}
                 >
 
                     <div className="col-md-6 d-flex justify-content-center align-item-center ">
                         <img
-                            src="images/500-2.jpg"
+                            src="../images/500-2.jpg"
                             className="img-fluid rounded"
                             alt="..."
                         />
@@ -58,10 +59,6 @@ function PetDetails() {
                                     It is a very clever animal and is very useful in catching thieves.
                                     It runs very fast, barks loudly and attacks the strangers.</span>
                             </p>
-
-
-
-
                             <p className="card-text mx-3 mt-4">
                                 <button type="button" className="btn btn-outline-primary ">
                                     Edit
@@ -69,6 +66,9 @@ function PetDetails() {
                                 <button type="button" className="btn btn-outline-danger mx-2" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                     Delete
                                 </button>
+                                <Link type="button" className="btn btn-outline-primary" to={"/admin/pendingrequest"}>
+                                    Back
+                                </Link>
                             </p>
                         </div>
                     </div>
@@ -89,7 +89,7 @@ function PetDetails() {
                                 Are you sure you want to delete your Request?
                             </div>
                             <div className="text-end mt-4 px-4">
-                                <button type="button" className="btn btn-outline-primary mx-3">Cencle</button>
+                                <button type="button" className="btn btn-outline-primary mx-3">Cancel</button>
                                 <button type="button" className="btn btn-outline-danger">Delete</button>
                             </div>
                         </div>
@@ -98,6 +98,7 @@ function PetDetails() {
                 </div>
             </div>
 
+            </div>
         </>
     )
 }

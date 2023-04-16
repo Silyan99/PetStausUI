@@ -7,32 +7,38 @@ import Navbar from "./component/Navbar";
 import SignUp from "./component/SignUp";
 import Login from "./component/Login";
 import User from "./component/User";
-import Payment from "./component/Payment";
 import PetDetails from "./component/PetDetails";
 import Appointment from "./component/Appointment";
 import MyRequests from "./component/MyRequests";
 import PendingRequest from "./component/PendingRequest";
 import AddOffTimings from "./component/AddOffTimings";
+import { ProtectedAdminRoute, ProtectedCustomerRoute } from "./core/authsecurity";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  
   return (
     <div className="App">
       <BrowserRouter>
         <Navbar />
+        <ToastContainer/>
         <Routes>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/admin" element={<Admin />}></Route>
           <Route path="/contact" element={<Contact />}></Route>
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/user" element={<User />}></Route>
-          <Route path="/payment" element={<Payment />}></Route>
-          <Route path="/petdetails" element={<PetDetails />}></Route>
-          <Route path="/appointment" element={<Appointment/>}></Route>
-          <Route path="/myrequests" element={<MyRequests/>}></Route>
-          <Route path="/pendingrequest" element={<PendingRequest/>}></Route>
-          <Route path="/addofftimings" element={<AddOffTimings/>}></Route>
-          
+          <Route path="/admin/" element={<ProtectedAdminRoute/>}>
+            <Route path="addofftimings" element={<AddOffTimings />}></Route>
+            <Route path="pendingrequest" element={<PendingRequest />}></Route>
+            <Route path="petdetails" element={<PetDetails />}></Route>
+          </Route>
+          <Route path="/customer/" element={<ProtectedCustomerRoute/>}>
+            <Route path="editrequest" element={<Admin />}></Route>
+            <Route path="user" element={<User />}></Route>
+            <Route path="appointment" element={<Appointment />}></Route>
+            <Route path="myrequests" element={<MyRequests />}></Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
