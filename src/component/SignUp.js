@@ -2,10 +2,10 @@ import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import * as service from "../core/service/service";
 import UrlConstant from "../constants/UrlConstant";
-import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
+import config from "../core/config/config";
 
 function SignUp() {
-  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -13,7 +13,6 @@ function SignUp() {
   const [cfPassword, setCfPassword] = useState("");
 
   const submitHandler = async (e) => {
-    e.preventDefault();
     const data = {
       Email: email,
       Password: password,
@@ -21,16 +20,23 @@ function SignUp() {
       Mobile: phone
     };
     service
-      .post(UrlConstant.Signup, data)
+      .post(UrlConstant.Signup, JSON.stringify(data))
       .then((resp) => {
-        if (resp.statusText === "OK") {
+        if (resp.status === 200) {
           setName("");
           setEmail("");
           setPassword("");
           setCfPassword("");
           setPhone("");
-          console.log(resp.data.Message);
-          return navigate("/login");
+          if (resp.data.Status) {
+            toast.success(resp.data.Message, config.ToastConfig);
+            setTimeout(() => {
+              window.location.href = "/login";
+            }, 2500);
+          }
+          else{
+            toast.error("Unable to create user.", config.ToastConfig);
+          }
         }
       })
       .catch((err) => {

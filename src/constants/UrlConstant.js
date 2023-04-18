@@ -1,6 +1,7 @@
 const UrlConstant = {
-    Login: "/PetStays/Login",
-    Signup: "/PetStays/Signup"
+    Login: "/api/PetStays/Login",
+    Signup: "/api/PetStays/SignUpUser",
+    Admin_AllRequests:"/PetStays/GetAllRequest"
 }
 
 export default UrlConstant;
