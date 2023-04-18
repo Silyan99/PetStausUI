@@ -5,64 +5,42 @@ function PendingRequest() {
     <>
       <div className="container">
         <p className="my-4 py-5 display-6">
-          Pending <span className="text-danger">Requests</span>
+          Pending <span className="text-danger">Requests</span><hr/>
         </p>
-        <hr></hr>
+        
         <div className="table-box p-5 rounded-3 scroll">
-          <table className="table table-hover text-start align-middle">
-            <thead className="admin-table">
+         
+          <table className="table1">
+            <thead>
               <tr>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  PET
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Pet UID
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Pet Name
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Owner
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Pet Age
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Address
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Status
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Remark
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  View Request
-                </th>
+                <th className="fw-normal text-center" >S No.</th>
+                <th className="fw-normal text-center" >Pet UID</th>
+                <th className="fw-normal text-center" >Pet Name</th>
+                <th className="fw-normal text-center" >Owner</th>
+                <th className="fw-normal text-center" >Pet Age</th>
+                <th className="fw-normal text-center" >Address</th>
+                <th className="fw-normal text-center" >Status</th>
+                <th className="fw-normal text-center" >Remark</th>
+                <th className="fw-normal text-center" >View</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td className="py-4 px-3">
-                  <div className="table-pic">
-                    <img src="../images/200-5.jpg" alt="view" />
-                  </div>
-                </td>
-                <td className="py-4 px-3">5465</td>
-                <td className="py-4 px-3">Shiro</td>
-                <td className="py-4 px-3">John Wick</td>
-                <td className="py-4 px-3">3 Year</td>
-                <td className="py-4 px-3">164 St No. 9</td>
-                <td className="py-4 px-3 text-primary">Pending</td>
-                <td className="py-4 px-3">-</td>
-                <td className="py-4 px-3">
+                <td className="py-4  text-center">1</td>
+                <td className="py-4  text-center">5726</td>
+                <td className="py-4  text-center">Shiro</td>
+                <td className="py-4  text-center">John Wick</td>
+                <td className="py-4  text-center">2 Years</td>
+                <td className="py-4  text-center">#465 st.6</td>
+                <td className="py-4  text-center">Pending</td>
+                <td className="py-4  text-center">-</td>
+                <td className="py-4  text-center">
                   <Link to={"/admin/petdetails"}>
-                    <div className="table-icon">
-                      <img src="../images/view.png" alt="view" />
-                    </div>
+                    <img className="table-icon" src="../images/view.png" alt="view" />
                   </Link>
                 </td>
               </tr>
+
             </tbody>
           </table>
         </div>

@@ -82,7 +82,7 @@ function Login() {
         <hr></hr>
         <form className="m-5">
           <div className="input-box">
-            <ul className="nav nav-tabs mb-5" id="myTab" role="tablist">
+            {/* <ul className="nav nav-tabs mb-5" id="myTab" role="tablist">
               <li className="nav-item" role="presentation">
                 <button
                   className="nav-link active"
@@ -113,7 +113,7 @@ function Login() {
                   Admin
                 </button>
               </li>
-            </ul>
+            </ul> */}
             <div className="tab-content" id="myTabContent">
               <div
                 className="tab-pane fade show active"
@@ -137,7 +137,7 @@ function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
-              <div
+              {/* <div
                 className="tab-pane fade"
                 id="profile-tab-pane"
                 role="tabpanel"
@@ -158,7 +158,7 @@ function Login() {
                   value={adminPassword}
                   onChange={(e) => setAdminPassword(e.target.value)}
                 />
-              </div>
+              </div> */}
             </div>
 
             <div className="d-grid gap-2 col-12 mx-auto mt-4">

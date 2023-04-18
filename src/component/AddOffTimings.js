@@ -4,7 +4,8 @@ function AddOffTimings() {
         <>
             <div className="container">
                 <p className="my-4 py-5 display-6">Add <span className="text-danger"> Off Timings</span></p>
-                <hr></hr>
+                <hr/>
+                
                 <div className="col-md-12 table-box d-flex flex-row justify-content-around flex-wrap">
                     <div className="col-md-3">
                         <div className="col-md-12 ">

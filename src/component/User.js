@@ -7,7 +7,7 @@ function User() {
       <div className="container">
         <p className="display-6 my-5 text-center py-5">
           Greetings from our <span className="text-danger">Pet Stays</span>
-        </p>
+        </p><hr/>
       </div>
 
       <div className="container mt-5 ">

@@ -6,7 +6,7 @@ function Appointment() {
       <div className="container text-start my-5 py-5">
         <p className="display-6 my-5 pb-5">
           Create the <span className="text-danger"> Appointment</span>{" "}
-        </p>
+        </p><hr/>
 
         <div className="pet-radio-inputs my-5 ">
           <label className="pet-radio">
@@ -207,6 +207,45 @@ function Appointment() {
 
           <div className="col-md-8 my-4">
             <label htmlFor="delivery-time">Pet Pick-Up Time : </label>
+            <input
+              type="time"
+              className="input-time mx-2"
+              id="delivery-time"
+              name="delivery-time"
+              min="10:00"
+              max="15:00"
+              required
+            />
+          </div>
+          <p className="mt-5"> Pet Drop Date:</p>
+          <div className="col-md-6 my-3 ">
+            <label htmlFor="pickup-date-from " className="mx-0">
+              {" "}
+              From :
+            </label>
+            <input
+              type="date"
+              className="input-time mx-3"
+              id="pickup-date-from"
+              name="pickup-date-from"
+              required
+            />
+          </div>
+          <div className="col-md-6 my-3 ">
+            <label htmlFor="pickup-date-to" className="mx-3">
+              To :
+            </label>
+            <input
+              type="date"
+              className="input-time"
+              id="pickup-date-to"
+              name="pickup-date-to"
+              required
+            />
+          </div>
+
+          <div className="col-md-8 my-4">
+            <label htmlFor="delivery-time">Pet Drop Time : </label>
             <input
               type="time"
               className="input-time mx-2"
