@@ -78,9 +78,9 @@ function Home(props) {
 
       <div>
         <div className="card text-bg-dark border-0 rounded-0">
-          <img src="./images/home-top-bg2.jpg" className="card-img rounded-0 border-0" alt="..." />
+          <img src="./images/home-top-bg2.jpg" className="card-img roun ded-0 border-0 mt-5 " alt="..." />
           <div className="card-img-overlay mt-5 rounded-0">
-            <h5 className="text-light display-2 my-3 p-5 fw-normal text-start">Pet Stays</h5>
+            <h5 className="text-light display-2 my-3 px-4 py-3 fw-normal text-start">Pet Stays</h5>
             <div className="d-none d-sm-none d-md-none d-lg-block">
               <p className=" text-light display-5 fw-light px-5 pt-3 text-start">We'll <span className="text-danger">care</span> for your pets </p>
               <p className=" text-light display-5 fw-light px-5 text-start">the same way you <span className="text-danger">do.</span></p>
@@ -207,10 +207,10 @@ function Home(props) {
       </div>
 
       <div className="mt-5">
-        <div className="card text-bg-dark border-0 rounded-0">
-          <img src="./images/home-top-bg7.jpg" className="card-img rounded-0 border-0" alt="..." />
-          <div className="card-img-overlay mt-5 rounded-0">
-            <h5 className="text-dark display-2 my-3 p-5 fw-normal text-start">Pet Stays</h5>
+        <div className="card text-bg-dark border-0 rounded-0 ">
+          <img src="./images/home-top-bg7.jpg" className="card-img rounded-0 border-0 " alt="..." />
+          <div className="card-img-overlay  rounded-0">
+            <h5 className="text-dark display-2 my-3 px-4 py-3 fw-normal text-start">Pet Stays</h5>
             <div className="d-none d-sm-none d-md-none d-lg-none d-xl-block">
               <p className=" text-dark display-5 fw-light px-5 pt-3 text-start">Our pets' lives revolve <span className="text-danger">around us.</span> Let's give</p>
               <p className=" text-dark display-5 fw-light px-5 text-start">back to them as much as <span className="text-danger"> they give us.</span></p>

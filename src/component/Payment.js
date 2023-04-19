@@ -4,7 +4,7 @@ function Payment() {
     <div>
       <div className="container mt-5 p-5">
         <form className="" novalidate="">
-          <h4 className="mb-5 display-3 text-start">Payment</h4>
+          <h4 className="mb-5 display-3 text-start">Payment</h4><hr/>
 
           <div className="my-3 text-start">
             <div className="form-check">

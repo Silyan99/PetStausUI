@@ -29,40 +29,23 @@ function PendingRequest() {
     <>
       <div className="container">
         <p className="my-4 py-5 display-6">
-          Pending <span className="text-danger">Requests</span>
+          Pending <span className="text-danger">Requests</span><hr/>
         </p>
-        <hr></hr>
+        
         <div className="table-box p-5 rounded-3 scroll">
-          <table className="table table-hover text-start align-middle">
-            <thead className="admin-table">
+         
+          <table className="table1">
+            <thead>
               <tr>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  PET
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Pet UID
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Pet Name
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Owner
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Pet Age
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Address
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Status
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  Remark
-                </th>
-                <th className="fw-normal h5 pb-5 px-3" scope="col">
-                  View Request
-                </th>
+                <th className="fw-normal text-center" >S No.</th>
+                <th className="fw-normal text-center" >Pet UID</th>
+                <th className="fw-normal text-center" >Pet Name</th>
+                <th className="fw-normal text-center" >Owner</th>
+                <th className="fw-normal text-center" >Pet Age</th>
+                <th className="fw-normal text-center" >Address</th>
+                <th className="fw-normal text-center" >Status</th>
+                <th className="fw-normal text-center" >Remark</th>
+                <th className="fw-normal text-center" >View</th>
               </tr>
             </thead>
             <tbody>
