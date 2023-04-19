@@ -40,9 +40,10 @@ function Login() {
       .then((resp) => {
         if (resp.status === 200) {
           toast.success("Login Successful!", config.ToastConfig);
-          authenticate(resp.data);
+          let user= authenticate(resp.data);
           let redirectURL = "/customer/myrequests";
-          if (loggedUser.IsAdmin) {
+          debugger
+          if (user.IsAdmin) {
             redirectURL = "/admin/pendingrequest";
           }
           const loginRedirect = new Promise((resolve) =>

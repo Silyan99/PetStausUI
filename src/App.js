@@ -31,10 +31,10 @@ function App() {
           <Route path="/admin/" element={<ProtectedAdminRoute/>}>
             <Route path="addofftimings" element={<AddOffTimings />}></Route>
             <Route path="pendingrequest" element={<PendingRequest />}></Route>
-            <Route path="petdetails" element={<PetDetails />}></Route>
+            <Route path="editrequest/:id" element={<Admin />}></Route>
           </Route>
           <Route path="/customer/" element={<ProtectedCustomerRoute/>}>
-            <Route path="editrequest" element={<Admin />}></Route>
+            <Route path="petdetails/:id" element={<PetDetails />}></Route>
             <Route path="user" element={<User />}></Route>
             <Route path="appointment" element={<Appointment />}></Route>
             <Route path="myrequests" element={<MyRequests />}></Route>

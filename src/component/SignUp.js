@@ -11,13 +11,15 @@ function SignUp() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [cfPassword, setCfPassword] = useState("");
+  const [address, setAddress] = useState("");
 
   const submitHandler = async (e) => {
     const data = {
       Email: email,
       Password: password,
       Name: name,
-      Mobile: phone
+      Mobile: phone,
+      Address:address
     };
     service
       .post(UrlConstant.Signup, JSON.stringify(data))
@@ -28,6 +30,7 @@ function SignUp() {
           setPassword("");
           setCfPassword("");
           setPhone("");
+          setAddress("");
           if (resp.data.Status) {
             toast.success(resp.data.Message, config.ToastConfig);
             setTimeout(() => {
@@ -54,6 +57,7 @@ function SignUp() {
     setPassword("");
     setCfPassword("");
     setPhone("");
+    setAddress("");
   },[])
 
   return (
@@ -97,6 +101,13 @@ function SignUp() {
               placeholder="Confirm-Password"
               value={cfPassword}
               onChange={e => setCfPassword(e.target.value)}
+            />
+            <input
+              className="my-2"
+              type="text"
+              placeholder="Address"
+              value={address}
+              onChange={e => setAddress(e.target.value)}
             />
 
             <div className="d-grid gap-2 col-12 mx-auto mt-4">

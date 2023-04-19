@@ -5,6 +5,7 @@ const AdminKey = "7NKBuMfwTM";
 const CustomerKey = "wfZmflTyvR";
 
 const ProtectedAdminRoute = () => {
+  debugger
   var authToken = localStorage.getItem(TOKEN_KEY);
   if (!authToken) {
     return <Navigate to="/" />;
@@ -21,6 +22,7 @@ const ProtectedAdminRoute = () => {
 };
 
 const ProtectedCustomerRoute = () => {
+  debugger
   var authToken = localStorage.getItem(TOKEN_KEY);
   if (!authToken) {
     return <Navigate to="/" />;
@@ -38,6 +40,13 @@ const ProtectedCustomerRoute = () => {
 
 const authenticate = (data) => {
   localStorage.setItem(TOKEN_KEY, data.Token);
+  let userData = jwt_decode(data.Token);
+    let adminKey = userData["AdminKey"];
+    let customerKey = userData["CustomerKey"];
+    return {
+      IsAdmin:adminKey === AdminKey,
+      IsCustomer:customerKey === CustomerKey,
+    };
 };
 
 const logout = () => {
@@ -45,7 +54,7 @@ const logout = () => {
   window.location.reload();
 };
 
-
+const GetAuthToken=()=>localStorage.getItem(TOKEN_KEY);
 
 const loggedUser = (function () {
 
@@ -76,4 +85,5 @@ export {
   authenticate,
   logout,
   loggedUser,
+  GetAuthToken
 };

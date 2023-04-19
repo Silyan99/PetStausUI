@@ -1,5 +1,5 @@
 const config = {
-  BaseAPI: 'https://3.27.10.229/api',
+  BaseAPI: 'https://localhost:7040/api',
   ToastConfig: {
     position: "top-right",
     autoClose: 3500,
@@ -11,5 +11,7 @@ const config = {
     theme: "dark"
   },
 };
+
+
 
 export default config;

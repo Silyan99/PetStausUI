@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import * as service from "../core/service/service";
+import UrlConstant from "../constants/UrlConstant";
+import { toast } from "react-toastify";
+import config from "../core/config/config";
+
 function PendingRequest() {
+  const [requests, setRequests] = useState([]);
+  const GetAllRequests = () => {
+    service
+      .get(UrlConstant.Admin_AllRequests)
+      .then((resp) => {
+        if (resp.status === 200) {
+          setRequests(resp.data);
+        } else {
+          toast.error("Error loading requests", config.ToastConfig);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Error loading requests", config.ToastConfig);
+      });
+  };
+  useEffect(() => {
+    GetAllRequests();
+  }, []);
   return (
     <>
       <div className="container">
@@ -42,27 +66,45 @@ function PendingRequest() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="py-4 px-3">
-                  <div className="table-pic">
-                    <img src="../images/200-5.jpg" alt="view" />
-                  </div>
-                </td>
-                <td className="py-4 px-3">5465</td>
-                <td className="py-4 px-3">Shiro</td>
-                <td className="py-4 px-3">John Wick</td>
-                <td className="py-4 px-3">3 Year</td>
-                <td className="py-4 px-3">164 St No. 9</td>
-                <td className="py-4 px-3 text-primary">Pending</td>
-                <td className="py-4 px-3">-</td>
-                <td className="py-4 px-3">
-                  <Link to={"/admin/petdetails"}>
-                    <div className="table-icon">
-                      <img src="../images/view.png" alt="view" />
-                    </div>
-                  </Link>
-                </td>
-              </tr>
+              {requests.length > 0 ? (
+                <>
+                  {requests.map((x) => {
+                    return (
+                      <>
+                        <tr>
+                          <td className="py-4 px-3">
+                            <div className="table-pic">
+                              <img src={`../images/${x.Photo || (x.Category.toLowerCase()==="dog"?"default_dog.png":"default_cat.png")}`} alt="view" />
+                            </div>
+                          </td>
+                          <td className="py-4 px-3">{x.Uid}</td>
+                          <td className="py-4 px-3">{x.Name}</td>
+                          <td className="py-4 px-3">{x.OwnerId}</td>
+                          <td className="py-4 px-3">{x.Age}yrs</td>
+                          {/* todo */}
+                          <td className="py-4 px-3">{x.Address}</td>
+                          {/* todo */}
+                          <td className="py-4 px-3 text-primary">{x.Status}</td>
+                          <td className="py-4 px-3">{x.Remarks}</td>
+                          <td className="py-4 px-3">
+                            <Link to={`/admin/editrequest/${x.PetId}`}>
+                              <div className="table-icon">
+                                <img src="../images/view.png" alt="view" />
+                              </div>
+                            </Link>
+                          </td>
+                        </tr>
+                      </>
+                    );
+                  })}
+                </>
+              ) : (
+                <tr>
+                  <td colSpan={9}>
+                    <div className="text-center">No records</div>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
         </div>

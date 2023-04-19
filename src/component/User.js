@@ -1,7 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import * as service from "../core/service/service";
+import UrlConstant from "../constants/UrlConstant";
+import config from "../core/config/config";
+import { loggedUser } from "../core/authsecurity";
+import { toast } from "react-toastify";
 
 function User() {
+  const [user, setUser] = useState({});
+  const GetUserDetails = () => {
+    service
+      .get(UrlConstant.Customer_GetRequestDetailURL(loggedUser.Id))
+      .then((response) => {
+        if (response.status === 200) {
+          setUser(response.data);
+        }
+        else{
+            toast.error("Failed to load Pet details", config.ToastConfig);
+        }
+      })
+      .catch((error) => {
+        toast.error("Failed to load Pet details", config.ToastConfig);
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    GetUserDetails();
+  }, []);
+
   return (
     <div>
       <div className="container">
@@ -16,15 +43,16 @@ function User() {
             <img src="../images/user-dp.png" alt="Profile" />
           </div>
           <div className="profile-info text-start mx-4">
-            <h1 className="">John Wick</h1>
+            <h1 className="">{user.FullName}</h1>
+            {/* todo */}
             <h5 className=" fw-normal my-4">johnwick05</h5>
 
             <p className="">
-              Email : <span>john.wick@gmail.com</span>
+              Email : <span>{user.Email}</span>
             </p>
 
             <p>
-              Phone :<span> 123-456-7890</span>
+              Phone :<span> {user.Mobile}</span>
             </p>
           </div>
         </div>

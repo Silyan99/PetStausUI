@@ -97,7 +97,7 @@ function MyRequests() {
           </table>
         </div>
         <div className="text-end my-5">
-        <Link to={"/Appointment"}>
+        <Link to={"/customer/appointment"}>
           <button className="btn btn-outline-success px-4 mx-3">
             Add new request
           </button>
