@@ -515,7 +515,10 @@ td,th{
   top: 100%;
   left: -87px;
   margin-top: var(--bs-dropdown-spacer);
-  
+  box-shadow: 0px 2px 6px 0px #ccbebed9;
+}
+.dropdown-menu[data-bs-popper] li:last-child {
+  border-top:#eee6e6 1px solid;
 }
 .dropdown-menu{
   --bs-dropdown-link-active-bg: #ffffff;

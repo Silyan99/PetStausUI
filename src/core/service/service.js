@@ -13,8 +13,7 @@ let serviceConfig = {
 const baseAPI = axios.create({ baseURL: config.BaseAPI });
 
 export const get = (url) => {
-    let getPromise = baseAPI.get(url, serviceConfig);
-    toast.clearWaitingQueue();
+    const getPromise = baseAPI.get(url, serviceConfig);
     toast.promise(getPromise, {
         pending: "Loading...",
     }, config.ToastConfig);
@@ -26,7 +25,7 @@ export const get = (url) => {
 };
 
 export const put = (url,data)=>{
-    let postPromise = baseAPI.put(url, data, serviceConfig);
+    const postPromise = baseAPI.put(url, data, serviceConfig);
     toast.promise(postPromise, {
         pending: "Saving...",
     });
@@ -34,7 +33,7 @@ export const put = (url,data)=>{
 }
 
 export const post = (url, data) => {
-    let postPromise = baseAPI.post(url, data, serviceConfig);
+    const postPromise = baseAPI.post(url, data, serviceConfig);
     toast.promise(postPromise, {
         pending: "Saving...",
     });

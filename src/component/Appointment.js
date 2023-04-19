@@ -3,23 +3,24 @@ import { Link } from "react-router-dom";
 function Appointment() {
   return (
     <>
-      <div className="container text-start my-5 py-5">
-        <p className="display-6 my-5 pb-5">
+      <div className="container my-3 py-5">
+        <p className="display-6 my-4 pb-4">
           Create the <span className="text-danger"> Appointment</span>{" "}
-        </p><hr/>
+        </p>
+        <hr />
 
-        <div className="pet-radio-inputs my-5 ">
+        <div className="pet-radio-inputs my-3">
           <label className="pet-radio">
-            <input type="radio" name="radio" checked />
-            <span className="name">Dog</span>
+            <input type="radio" name="petCategory" checked value="Dog" />
+            <span className="name" >Dog</span>
           </label>
           <label className="pet-radio">
-            <input type="radio" name="radio" />
+            <input type="radio" name="petCategory" value="Cat"/>
             <span className="name">Cat</span>
           </label>
         </div>
 
-        <div className="col-md-12 ">
+        {/* <div className="col-md-12 ">
           <label htmlFor="inputEmail4" className="form-label">
             Number of pets that would like to bring to the daycare
           </label>
@@ -29,29 +30,30 @@ function Appointment() {
             id="inputEmail4"
             required
           />
-        </div>
-
-        <form className="row  my-5 ">
+        </div> */}
+        <form className="row my-5">
           <div className="col-md-6 mb-3 my-4">
-            <label htmlFor="formGroupExampleInput" className="form-label">
+            <label htmlFor="petname" className="form-label">
               Pet Name
             </label>
             <input
               type="text"
               className="form-control"
-              id="formGroupExampleInput"
+              id="petname"
+              name="petname"
               placeholder=""
               required
             />
           </div>
           <div className="col-md-6 mb-3 my-4">
-            <label htmlFor="formGroupExampleInput" className="form-label">
+            <label htmlFor="petcolor" className="form-label">
               Pet color
             </label>
             <input
               type="text"
               className="form-control"
-              id="formGroupExampleInput"
+              id="petcolor"
+              name="petColor"
               placeholder=""
               required
             />
@@ -66,30 +68,30 @@ function Appointment() {
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input mx-1"
-                type="checkbox"
-                name="inlineRadioOptions"
-                id="inlineRadio1"
-                defaultValue="option1"
+                type="radio"
+                name="petVaccination"
+                id="petVaccinatedTrue"
+                value="true"
               />
-              <label className="form-check-label" htmlFor="inlineRadio1">
+              <label className="form-check-label" htmlFor="petVaccinatedTrue">
                 Yes
               </label>
             </div>
             <div className="form-check form-check-inline">
               <input
                 className="form-check-input mx-1"
-                type="checkbox"
-                name="inlineRadioOptions"
-                id="inlineRadio2"
-                defaultValue="option2"
+                type="radio"
+                name="petVaccination"
+                id="petVaccinatedFalse"
+                value="false"
               />
-              <label className="form-check-label" htmlFor="inlineRadio2">
+              <label className="form-check-label" htmlFor="petVaccinatedFalse">
                 No
               </label>
             </div>
           </div>
           <div className="col-md-6 my-2 d-flex flex-row align-items-center">
-            <label className="form-check-label" htmlFor="flexCheckDefault">
+            <label className="form-check-label" htmlFor="petGender">
               Gender :
             </label>
             <div className="col-md-2 my-2 mx-5">
@@ -97,12 +99,12 @@ function Appointment() {
                 <input
                   className="form-check-input"
                   type="radio"
-                  name="exampleRadios"
-                  id="exampleRadios1"
-                  value="option1"
+                  name="petGender"
+                  id="petGenderMale"
+                  value="male"
                   checked
                 />
-                <label className="form-check-label" htmlFor="exampleRadios1">
+                <label className="form-check-label" htmlFor="petGenderMale">
                   Male
                 </label>
               </div>
@@ -112,11 +114,11 @@ function Appointment() {
                 <input
                   className="form-check-input"
                   type="radio"
-                  name="exampleRadios"
-                  id="exampleRadios2"
-                  value="option2"
+                  name="petGender"
+                  id="petGenderFemale"
+                  value="female"
                 />
-                <label className="form-check-label" htmlFor="exampleRadios2">
+                <label className="form-check-label" htmlFor="petGenderFemale">
                   Female
                 </label>
               </div>
@@ -128,27 +130,27 @@ function Appointment() {
               {" "}
               Age
             </label>
-            <input type="number" className="form-control" id="age" required />
+            <input type="number" className="form-control" id="age" name="Age" required />
           </div>
           <div className="col-md-6 mb-3 my-4">
-            <label htmlFor="formGroupExampleInput" className="form-label">
+            <label htmlFor="petBreed" className="form-label">
               Breed
             </label>
             <input
               type="text"
               className="form-control"
-              id="formGroupExampleInput"
+              id="petBreed"
               placeholder=""
               required
             />
           </div>
-          <div className="col-md-12 mb-3 my-4">
+          {/* <div className="col-md-12 mb-3 my-4">
             <label htmlFor="Address" className="form-label">
               {" "}
               Address
             </label>
-            <input type="text" className="form-control" id="Address" required />
-          </div>
+            <input type="text" className="form-control" id="Address" name="petAddress" required />
+          </div> */}
 
           <div className="input-group my-4">
             <input
@@ -157,6 +159,7 @@ function Appointment() {
               id="inputGroupFile04"
               aria-describedby="inputGroupFileAddon04"
               aria-label="Upload"
+              name="petPhoto"
               required
             />
             <button
@@ -174,83 +177,57 @@ function Appointment() {
             <textarea
               className="form-control"
               id="exampleFormControlTextarea1"
+              name="petDetail"
               rows="3"
             ></textarea>
           </div>
 
-          <p> Pet Pick-Up Date:</p>
+          <p> Pet Pick-Up and Drop Date:</p>
           <div className="col-md-6 my-3 ">
-            <label htmlFor="pickup-date-from " className="mx-0">
+            <label htmlFor="dropDate" className="mx-0">
               {" "}
-              From :
+              From Date:
             </label>
             <input
               type="date"
               className="input-time mx-3"
-              id="pickup-date-from"
-              name="pickup-date-from"
+              id="dropDate"
+              name="dropDate"
               required
             />
           </div>
           <div className="col-md-6 my-3 ">
-            <label htmlFor="pickup-date-to" className="mx-3">
-              To :
+            <label htmlFor="pickDate" className="mx-3">
+              To Date:
             </label>
             <input
               type="date"
               className="input-time"
-              id="pickup-date-to"
-              name="pickup-date-to"
+              id="pickDate"
+              name="pickDate"
               required
             />
           </div>
 
-          <div className="col-md-8 my-4">
-            <label htmlFor="delivery-time">Pet Pick-Up Time : </label>
+          <div className="col-md-6 my-4">
+            <label htmlFor="dropTime">From Time :</label>
             <input
               type="time"
               className="input-time mx-2"
-              id="delivery-time"
-              name="delivery-time"
+              id="dropTime"
+              name="dropTime"
               min="10:00"
               max="15:00"
               required
             />
           </div>
-          <p className="mt-5"> Pet Drop Date:</p>
-          <div className="col-md-6 my-3 ">
-            <label htmlFor="pickup-date-from " className="mx-0">
-              {" "}
-              From :
-            </label>
-            <input
-              type="date"
-              className="input-time mx-3"
-              id="pickup-date-from"
-              name="pickup-date-from"
-              required
-            />
-          </div>
-          <div className="col-md-6 my-3 ">
-            <label htmlFor="pickup-date-to" className="mx-3">
-              To :
-            </label>
-            <input
-              type="date"
-              className="input-time"
-              id="pickup-date-to"
-              name="pickup-date-to"
-              required
-            />
-          </div>
-
-          <div className="col-md-8 my-4">
-            <label htmlFor="delivery-time">Pet Drop Time : </label>
+          <div className="col-md-6 my-4">
+            <label htmlFor="pickupTime">To Time : </label>
             <input
               type="time"
               className="input-time mx-2"
-              id="delivery-time"
-              name="delivery-time"
+              id="pickupTime"
+              name="pickupTime"
               min="10:00"
               max="15:00"
               required

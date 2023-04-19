@@ -4,12 +4,15 @@ import * as service from "../core/service/service";
 import UrlConstant from "../constants/UrlConstant";
 import { toast } from "react-toastify";
 import config from "../core/config/config";
+import { Get12HrsFormat, IsNullEmptyOfUndefined } from "../core/interactiveforms";
 function PetDetails() {
   let { id } = useParams();
   const [details, setDetails] = useState({});
-  const GetRequestDetails = (requestId) => {
+  
+  const GetRequestDetails = () => {
+    
     service
-      .get(UrlConstant.Customer_GetRequestDetailURL(requestId))
+      .get(UrlConstant.Customer_GetRequestDetailURL(id))
       .then((response) => {
         if (response.status === 200) {
             setDetails(response.data);
@@ -39,8 +42,8 @@ function PetDetails() {
   }
 
   useEffect(() => {
-    GetRequestDetails(id);
-  }, [id]);
+      GetRequestDetails(); 
+  }, []);
 
   return (
     <>
@@ -55,11 +58,11 @@ function PetDetails() {
             style={{ maxWidth: "80vw" }}
           >
             <div className="col-md-6 d-flex justify-content-center align-item-center ">
-              <img
-                src={`../images/${details.Photo}`}
-                className="img-fluid rounded"
-                alt="..."
-              />
+            <img
+              src={`/../images/${details.Photo || (details.Category && details.Category.toLowerCase()==="dog" ? "default_dog.png":"default_cat.png")}`}
+              className="img-fluid rounded"
+              alt="..."
+            />
             </div>
             <div className="col-md-6 text-start my-1">
               <div className="card-body">
@@ -92,13 +95,17 @@ function PetDetails() {
                   Address : <span>{details.Address ||''}</span>
                 </p>
                 <p className="h6 m-3">
-                    Pick-Up :{" "} {/* todo */}
-                  <span>At : 11:00 From : 05-04-2023 To : 10-04-2023</span>
+                    Drop On : { new Date(details.DateFrom).toDateString() },
+                  <span>{Get12HrsFormat(details.TimeFrom)}</span>
+                </p>
+                <p className="h6 m-3">
+                    Pick-Up : { new Date(details.DateTo).toDateString()},
+                  <span>{Get12HrsFormat(details.TimeTo)}</span>
                 </p>
                 <p className=" m-3">
                   <strong> Details : </strong>
                   <span>
-                  {details.Details ||''}
+                  {details.Details || ''}
                   </span>
                 </p>
                 <p className="card-text mx-3 mt-4">
@@ -116,7 +123,7 @@ function PetDetails() {
                   <Link
                     type="button"
                     className="btn btn-outline-primary"
-                    to={"/admin/pendingrequest"}
+                    to={`/customer/myrequests`}
                   >
                     Back
                   </Link>

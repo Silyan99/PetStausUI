@@ -22,7 +22,6 @@ const ProtectedAdminRoute = () => {
 };
 
 const ProtectedCustomerRoute = () => {
-  debugger
   var authToken = localStorage.getItem(TOKEN_KEY);
   if (!authToken) {
     return <Navigate to="/" />;

@@ -1,6 +1,15 @@
 import React from "react";
 import Footer from "./Footer";
+import { loggedUser } from "../core/authsecurity";
 function Home(props) {
+
+  if (loggedUser.IsLoggedIn) {
+    let redirectUrl = loggedUser.IsAdmin
+      ? "/admin/pendingrequest"
+      : "customer/myrequests";
+      window.location.href = redirectUrl;
+  }
+
   return (
     <>
       {/* <div

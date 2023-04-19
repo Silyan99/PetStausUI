@@ -4,7 +4,7 @@ import * as service from "../core/service/service";
 import { toast } from "react-toastify";
 import config from "../core/config/config";
 import UrlConstant from "../constants/UrlConstant";
-import { Get12HrsFormat } from "../core/interactiveforms";
+import { Get12HrsFormat, IsNullEmptyOfUndefined } from "../core/interactiveforms";
 
 function Admin() {
   const { id } = useParams();
@@ -57,6 +57,7 @@ function Admin() {
   };
 
   useEffect(() => {
+    if(!IsNullEmptyOfUndefined(id))
     GetPetDetails(id);
   }, [id]);
 

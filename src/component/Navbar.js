@@ -134,7 +134,7 @@ function Navbar(props) {
 
                   <ul className="dropdown-menu border-0 drop-box">
                     <li className="dropdown-item">
-                      <span className="navbar-text mx-1 text-end">
+                      <span className="navbar-text mx-1 text-end fw-bolder cursor-default">
                         {loggedUser.Username}
                       </span>
                     </li>

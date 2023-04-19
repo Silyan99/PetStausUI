@@ -10,7 +10,7 @@ function User() {
   const [user, setUser] = useState({});
   const GetUserDetails = () => {
     service
-      .get(UrlConstant.Customer_GetRequestDetailURL(loggedUser.Id))
+      .get(UrlConstant.Customer_GetUserDetails(loggedUser.Id))
       .then((response) => {
         if (response.status === 200) {
           setUser(response.data);
@@ -32,13 +32,13 @@ function User() {
   return (
     <div>
       <div className="container">
-        <p className="display-6 my-5 text-center py-5">
+        <p className="display-6 my-4 text-center py-5">
           Greetings from our <span className="text-danger">Pet Stays</span>
         </p><hr/>
       </div>
 
-      <div className="container mt-5 ">
-        <div className="profile my-5">
+      <div className="container mt-3">
+        <div className="profile my-4">
           <div className="profile-pic">
             <img src="../images/user-dp.png" alt="Profile" />
           </div>
@@ -50,9 +50,11 @@ function User() {
             <p className="">
               Email : <span>{user.Email}</span>
             </p>
-
             <p>
               Phone :<span> {user.Mobile}</span>
+            </p>
+            <p>
+              Address :<span> {user.Address}</span>
             </p>
           </div>
         </div>

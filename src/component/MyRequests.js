@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import * as service from "../core/service/service";
 import { Link } from "react-router-dom";
+import UrlConstant from "../constants/UrlConstant";
+import config from "../core/config/config";
+import { toast } from "react-toastify";
 function MyRequests() {
+  const [requests, setRequests] = useState([]);
+  const GetAllRequests = () => {
+    service
+      .get(UrlConstant.Customer_AllRequests)
+      .then((resp) => {
+        if (resp.status === 200) {
+          setRequests(resp.data);
+        } else {
+          toast.error("Error loading requests", config.ToastConfig);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("Error loading requests", config.ToastConfig);
+      });
+  };
+  useEffect(() => {
+    GetAllRequests();
+  }, []);
   return (
     <>
       <div className="container">
@@ -12,85 +35,91 @@ function MyRequests() {
           <table className="table1">
             <thead>
               <tr>
-                <th className="fw-normal text-center" >S.No</th>
-                <th className="fw-normal text-center" >Pet UID</th>
-                <th className="fw-normal text-center" >Pet Name</th>
-                <th className="fw-normal text-center" >Owner</th>
-                <th className="fw-normal text-center" >Pet Age</th>
-                <th className="fw-normal text-center" >Address</th>
-                <th className="fw-normal text-center" >Status</th>
-                <th className="fw-normal text-center" >Remark</th>
-                <th className="fw-normal text-center" >View</th>
+                <th className="fw-normal text-center">S.No</th>
+                <th className="fw-normal text-center">Pet UID</th>
+                <th className="fw-normal text-center">Pet Name</th>
+                <th className="fw-normal text-center">Owner</th>
+                <th className="fw-normal text-center">Pet Age</th>
+                <th className="fw-normal text-center">Address</th>
+                <th className="fw-normal text-center">Status</th>
+                <th className="fw-normal text-center">Remark</th>
+                <th className="fw-normal text-center">View</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="py-4  text-center">1</td>
-                <td className="py-4  text-center">5726</td>
-                <td className="py-4  text-center">Shiro</td>
-                <td className="py-4  text-center">John Wick</td>
-                <td className="py-4  text-center">2 Years</td>
-                <td className="py-4  text-center">#465 st.6</td>
-                <td className="py-4  text-center">Pending</td>
-                <td className="py-4  text-center">-</td>
-                <td className="py-4  text-center">
-                  <Link to={"/petdetails"}>               
-                      <img className="table-icon" src="../images/view.png" alt="view"/>
-                  </Link>
-                </td>
-              </tr>
-              <tr>
-                <td className="py-4  text-center">1</td>
-                <td className="py-4  text-center">5726</td>
-                <td className="py-4  text-center">Shiro</td>
-                <td className="py-4  text-center">John Wick</td>
-                <td className="py-4  text-center">2 Years</td>
-                <td className="py-4  text-center">#465 st.6</td>
-                <td className="py-4  text-center">Pending</td>
-                <td className="py-4  text-center">-</td>
-                <td className="py-4  text-center">
-                  <Link to={"/petdetails"}>               
-                      <img className="table-icon" src="../images/view.png" alt="view"/>
-                  </Link>
-                </td>
-              </tr>
-              <tr>
-                <td className="py-4  text-center">1</td>
-                <td className="py-4  text-center">5726</td>
-                <td className="py-4  text-center">Shiro</td>
-                <td className="py-4  text-center">John Wick</td>
-                <td className="py-4  text-center">2 Years</td>
-                <td className="py-4  text-center">#465 st.6</td>
-                <td className="py-4  text-center">Pending</td>
-                <td className="py-4  text-center">-</td>
-                <td className="py-4  text-center">
-                  <Link to={"/petdetails"}>               
-                      <img className="table-icon" src="../images/view.png" alt="view"/>
-                  </Link>
-                </td>
-              </tr>
+              {requests.length > 0 ? (
+                <>
+                  {requests.map((x) => {
+                    return (
+                      <>
+                        <tr>
+                          <td className="py-4  text-center">1</td>
+                          <td className="py-4  text-center">5726</td>
+                          <td className="py-4  text-center">Shiro</td>
+                          <td className="py-4  text-center">John Wick</td>
+                          <td className="py-4  text-center">2 Years</td>
+                          <td className="py-4  text-center">#465 st.6</td>
+                          <td className="py-4  text-center">Pending</td>
+                          <td className="py-4  text-center">-</td>
+                          <td className="py-4  text-center">
+                            <Link to={`/customer/petdetails/${x.PetId}`}>
+                              <img
+                                className="table-icon"
+                                src="../images/view.png"
+                                alt="view"
+                              />
+                            </Link>
+                          </td>
+                        </tr>
+                      </>
+                    );
+                  })}
+                </>
+              ) : (
+                <tr>
+                  <td colSpan={9}>
+                    <div className="text-center">No records</div>
+                  </td>
+                </tr>
+              )}
             </tbody>
           </table>
-
         </div>
         <div className="text-end my-5">
-        <Link to={"/customer/appointment"}>
-          <button className="btn btn-outline-success px-4 mx-3">
-            Add new request
-          </button>
+          <Link to={"/customer/appointment"}>
+            <button className="btn btn-outline-success px-4 mx-3">
+              Add new request
+            </button>
           </Link>
-          <button className="btn btn-outline-primary px-4 " data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <button
+            className="btn btn-outline-primary px-4 "
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
             Next
           </button>
         </div>
 
         {/* Modal */}
-        <div className="modal fade" id="exampleModal" tabIndex={-1} aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div
+          className="modal fade"
+          id="exampleModal"
+          tabIndex={-1}
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
           <div className="modal-dialog modal-xl">
             <div className="modal-content">
               <div className="modal-header">
-                <h1 className="modal-title fs-5" id="exampleModalLabel">Pricing</h1>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                <h1 className="modal-title fs-5" id="exampleModalLabel">
+                  Pricing
+                </h1>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                />
               </div>
               <div className="modal-body ">
                 <div className=" row m-5 d-flex flex-wrap my-5 py-5">
@@ -176,7 +205,9 @@ function MyRequests() {
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-outline-primary px-5">Pay</button>
+                <button type="button" className="btn btn-outline-primary px-5">
+                  Pay
+                </button>
               </div>
             </div>
           </div>

@@ -17,7 +17,7 @@ function SignUp() {
     const data = {
       Email: email,
       Password: password,
-      Name: name,
+      FullName: name,
       Mobile: phone,
       Address:address
     };
