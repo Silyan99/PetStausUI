@@ -9,7 +9,7 @@ function Appointment() {
           Create the <span className="text-danger"> Appointment</span>{" "}
         </p>
         <hr />
-        <div className="d-flex justify-content-center">
+        <div className="d-flex justify-content-center mt-5">
           <div className="pet-radio-inputs my-3 col-md-12">
             <label className="pet-radio">
               <input type="radio" name="petCategory" checked value="Dog" />
@@ -104,7 +104,7 @@ function Appointment() {
                 className="form-check-label mt-3"
                 htmlFor="flexCheckDefault"
               >
-                Vaccinated
+                Vaccinated :
               </label>
 
               <div className="form-check form-check-inline mt-3">
@@ -212,7 +212,7 @@ function Appointment() {
             </div>
 
             <p className="text-start my-4"> Pet Pick-Up and Drop Date:</p>
-            <div className="col-md-4 my-3 text-start">
+            <div className="col-md-6 my-3 text-start">
               <label htmlFor="dropDate" className="mx-0">
                 {" "}
                 From Date:
@@ -237,7 +237,7 @@ function Appointment() {
                 required
               />
             </div>
-            <div className="col-md-4 my-3 text-start">
+            <div className="col-md-6 my-3 text-start">
               <label htmlFor="pickDate" className="">
                 To Date:
               </label>

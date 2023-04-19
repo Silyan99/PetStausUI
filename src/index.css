@@ -475,7 +475,7 @@ td,th{
   td:nth-of-type(9)::before{
     content: "View";
   }
-
+  
   .file-uploader{
     display: flex;
     align-items: center;
@@ -486,6 +486,8 @@ td,th{
     width:100%;
     padding: 0;
   }
+  
+  
 }
 .dropbtn {
   background-color: #04AA6D;
@@ -528,6 +530,14 @@ td,th{
 }
 .dropdown-menu{
   --bs-dropdown-link-active-bg: #ffffff;
+}
+.form-box{
+  width: 50vw;
+}
+@media only screen and (max-width:968px){
+  .form-box{
+    width: auto;
+  }
 }
 
 .file-uploader{
