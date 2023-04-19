@@ -6,7 +6,7 @@ function Home(props) {
   if (loggedUser.IsLoggedIn) {
     let redirectUrl = loggedUser.IsAdmin
       ? "/admin/pendingrequest"
-      : "customer/myrequests";
+      : "/customer/user";
       window.location.href = redirectUrl;
   }
 

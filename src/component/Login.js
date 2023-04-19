@@ -41,8 +41,7 @@ function Login() {
         if (resp.status === 200) {
           toast.success("Login Successful!", config.ToastConfig);
           let user= authenticate(resp.data);
-          let redirectURL = "/customer/myrequests";
-          debugger
+          let redirectURL = "/customer/user";
           if (user.IsAdmin) {
             redirectURL = "/admin/pendingrequest";
           }
