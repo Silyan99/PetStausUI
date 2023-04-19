@@ -475,6 +475,17 @@ td,th{
   td:nth-of-type(9)::before{
     content: "View";
   }
+
+  .file-uploader{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .sub-file-uploder{
+    width:100%;
+    padding: 0;
+  }
 }
 .dropbtn {
   background-color: #04AA6D;
@@ -506,11 +517,6 @@ td,th{
   text-decoration: none;
   display: block;
 }
-
-.drop-box{
-  
-
-}
 .dropdown-menu[data-bs-popper] {
   top: 100%;
   left: -87px;
@@ -522,4 +528,12 @@ td,th{
 }
 .dropdown-menu{
   --bs-dropdown-link-active-bg: #ffffff;
+}
+
+.file-uploader{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 98%;
+  margin: auto;
 }
