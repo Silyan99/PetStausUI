@@ -32,8 +32,8 @@ function User() {
   return (
     <div>
       <div className="container">
-        <p className="display-6 my-4 text-center py-5">
-          Greetings from our <span className="text-danger">Pet Stays</span>
+        <p className="display-6 my-4 text-center py-5 pb-2">
+          Greetings from <span className="text-danger">Pet Stays</span>
         </p><hr/>
       </div>
 
@@ -44,9 +44,6 @@ function User() {
           </div>
           <div className="profile-info text-start mx-4">
             <h1 className="">{user.FullName}</h1>
-            {/* todo */}
-            <h5 className=" fw-normal my-4">johnwick05</h5>
-
             <p className="">
               Email : <span>{user.Email}</span>
             </p>

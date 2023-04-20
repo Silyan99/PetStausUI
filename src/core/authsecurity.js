@@ -5,7 +5,6 @@ const AdminKey = "7NKBuMfwTM";
 const CustomerKey = "wfZmflTyvR";
 
 const ProtectedAdminRoute = () => {
-  debugger
   var authToken = localStorage.getItem(TOKEN_KEY);
   if (!authToken) {
     return <Navigate to="/" />;
@@ -18,7 +17,7 @@ const ProtectedAdminRoute = () => {
       return <Outlet />;
     }
   }
-  return <Navigate to="/login/1" />;
+  return <Navigate to="/login" />;
 };
 
 const ProtectedCustomerRoute = () => {
@@ -34,7 +33,7 @@ const ProtectedCustomerRoute = () => {
       return <Outlet />;
     }
   }
-  return <Navigate to="/login/0" />;
+  return <Navigate to="/login" />;
 };
 
 const authenticate = (data) => {

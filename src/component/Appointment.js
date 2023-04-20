@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 function Appointment() {
   return (
     <>
-      <div className="container my-3 py-5">
-        <p className="display-6 my-4 pb-4">
+      <div className="container my-3 py-4">
+        <p className="display-6 my-4 pb-2">
           Create the <span className="text-danger"> Appointment</span>{" "}
         </p>
         <hr />
@@ -166,7 +166,7 @@ function Appointment() {
               <div className="col-md-3 ">
                 <img
                   src="../images/200-4.jpg"
-                  class="img-thumbnail border-0 mx-0"
+                  className="img-thumbnail border-0 mx-0"
                   alt="..."
                 />
               </div>
@@ -262,13 +262,16 @@ function Appointment() {
                 required
               />
             </div>
-            <Link to={"/myrequests"}>
-              <div className=" col-md-6 d-grid gap-2 mx-auto my-5">
-                <button type="submit" className="btn btn-primary">
+            
+              <div className="col-md-8 d-grid gap-2 mx-auto my-5 d-flex">
+                <button type="button" className="btn btn-primary w-45p">
                   Next
                 </button>
+                <button type="button" onClick={()=>{window.location.reload();}} className="btn btn-primary w-45p">
+                  Cancel
+                </button>
               </div>
-            </Link>
+            
           </form>
         </div>
       </div>

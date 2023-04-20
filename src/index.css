@@ -34,6 +34,12 @@
   border-radius: 20px;
 }
 
+
+
+.w-45p{
+  width: 45%;
+}
+
 .navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
   color: rgb(0, 0, 0);
 }

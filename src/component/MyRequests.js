@@ -27,7 +27,7 @@ function MyRequests() {
   return (
     <>
       <div className="container">
-        <p className="my-3 py-5 display-6 mt-4">
+        <p className="my-3 py-5 pb-2 display-6 mt-4">
           My <span className="text-danger">Requests</span>
         </p>
         <hr />
