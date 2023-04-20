@@ -163,14 +163,14 @@ function Appointment() {
             </div>
 
             <div className="file-uploader border col-md-12 my-4 rounded-2">
-              <div className="col-md-1 ">
+              <div className="col-md-3 ">
                 <img
                   src="../images/200-4.jpg"
                   class="img-thumbnail border-0 mx-0"
                   alt="..."
                 />
               </div>
-              <div className="col-md-11 sub-file-uploder px-3 border-0 my-3">
+              <div className="col-md-9 sub-file-uploder px-3 border-0 my-3">
                 <div className=" d-flex justify-content-between">
                   <input
                     type="file"
