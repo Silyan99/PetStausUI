@@ -4,7 +4,7 @@ import * as service from "../core/service/service";
 import UrlConstant from "../constants/UrlConstant";
 import { toast } from "react-toastify";
 import config from "../core/config/config";
-import { Get12HrsFormat, IsNullEmptyOfUndefined } from "../core/interactiveforms";
+import { Get12HrsFormat } from "../core/interactiveforms";
 function PetDetails() {
   let { id } = useParams();
   const [details, setDetails] = useState({});
@@ -86,13 +86,10 @@ function PetDetails() {
                   Gender : <span>{details.Gender}</span>
                 </p>
                 <p className="h6 m-3">
-                  Vaccinated : <span>{details.Vaccinated}</span>
+                  Vaccinated : <span>{details.Vaccinated === true ? "Yes":"No"}</span>
                 </p>
                 <p className="h6 m-3">
-                  Age : <span>{details.Age}y</span>
-                </p>
-                <p className="h6 m-3">
-                  Address : <span>{details.Address ||''}</span>
+                  Age : <span>{details.Age} Yrs</span>
                 </p>
                 <p className="h6 m-3">
                     Drop On : { new Date(details.DateFrom).toDateString() },

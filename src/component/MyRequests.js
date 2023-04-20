@@ -38,9 +38,9 @@ function MyRequests() {
                 <th className="fw-normal text-center">S.No</th>
                 <th className="fw-normal text-center">Pet UID</th>
                 <th className="fw-normal text-center">Pet Name</th>
-                <th className="fw-normal text-center">Owner</th>
+                {/* <th className="fw-normal text-center">Owner</th> */}
                 <th className="fw-normal text-center">Pet Age</th>
-                <th className="fw-normal text-center">Address</th>
+                {/* <th className="fw-normal text-center">Address</th> */}
                 <th className="fw-normal text-center">Status</th>
                 <th className="fw-normal text-center">Remark</th>
                 <th className="fw-normal text-center">View</th>
@@ -49,18 +49,18 @@ function MyRequests() {
             <tbody>
               {requests.length > 0 ? (
                 <>
-                  {requests.map((x) => {
+                  {requests.map((x,i) => {
                     return (
                       <>
                         <tr>
-                          <td className="py-4  text-center">1</td>
-                          <td className="py-4  text-center">5726</td>
-                          <td className="py-4  text-center">Shiro</td>
-                          <td className="py-4  text-center">John Wick</td>
-                          <td className="py-4  text-center">2 Years</td>
-                          <td className="py-4  text-center">#465 st.6</td>
-                          <td className="py-4  text-center">Pending</td>
-                          <td className="py-4  text-center">-</td>
+                          <td className="py-4  text-center">{i+1}</td>
+                          <td className="py-4  text-center">{x.Uid}</td>
+                          <td className="py-4  text-center">{x.Name}</td>
+                          {/* <td className="py-4  text-center">owner</td> */}
+                          <td className="py-4  text-center">{x.Age} Yrs</td>
+                          {/* <td className="py-4  text-center">{x.Address}</td> */}
+                          <td className="py-4  text-center">{x.Status}</td>
+                          <td className="py-4  text-center">{x.Remarks}</td>
                           <td className="py-4  text-center">
                             <Link to={`/customer/petdetails/${x.PetId}`}>
                               <img

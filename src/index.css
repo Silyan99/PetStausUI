@@ -319,9 +319,11 @@ s .pet-card img {
 }
 
 
-
-
 .table-icon{
+  cursor: pointer;
+}
+.table-icon img {
+  margin-top:3px;
   width: 25px;
   cursor: pointer;
   text-align: center;
@@ -329,6 +331,7 @@ s .pet-card img {
 
 .table-icon:hover {
   filter: opacity(0.5) drop-shadow(0 0 0 rgb(34, 107, 255)) saturate(5);
+  cursor: pointer;
 }
 
 .scroll {
@@ -561,4 +564,12 @@ td,th{
   flex-wrap: wrap;
   width: 98%;
   margin: auto;
+}
+
+.border-left-light{
+  border-left: solid 1px #e0e0e0;
+}
+
+.fw-500{
+  font-weight: 500;
 }

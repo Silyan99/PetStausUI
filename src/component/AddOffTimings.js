@@ -46,8 +46,8 @@ function AddOffTimings() {
     }
     let data = {
       Date: offtimeDay.value,
-      TimeStart: offtimetype !== "day" ? `${addtimestart.value}:00` : null,
-      TimeEnd: offtimetype !== "day" ? `${addtimeend.value}:00` : null,
+      TimeStart: offtimetype !== "day" ? `${addtimestart.value}:00` : "00:00:00",
+      TimeEnd: offtimetype !== "day" ? `${addtimeend.value}:00` : "00:00:00",
       FullDay: offtimetype === "day",
       AdminId: loggedUser.Id,
     };
@@ -59,10 +59,15 @@ function AddOffTimings() {
       .post(UrlConstant.Admin_SaveAvailability, data)
       .then((response) => {
         if (response.status === 200) {
-          toast.error("Timings saved.", config.ToastConfig);
-          setTimeout(() => {
-            window.location.reload();
-          }, 1500);
+          if(response.data.Status){
+            toast.error("Timings saved.", config.ToastConfig);
+            setTimeout(() => {
+              window.location.reload();
+            }, 1500);
+          }
+          else{
+            toast.error(response.data.Message, config.ToastConfig);  
+          }
         } else {
           toast.error("Failed to Save OffTimings", config.ToastConfig);
         }
@@ -74,11 +79,8 @@ function AddOffTimings() {
   };
 
   const ValidateInputData = (data) => {
-    let requiredValidationFailed =
-      IsNullEmptyOfUndefined(data.Date) ||
-      data.FullDay === true ||
-      IsNullEmptyOfUndefined(data.TimeStart) ||
-      IsNullEmptyOfUndefined(data.TimeEnd);
+    let requiredValidationFailed = IsNullEmptyOfUndefined(data.Date) ||  (data.FullDay !== true && (IsNullEmptyOfUndefined(data.TimeStart) || IsNullEmptyOfUndefined(data.TimeEnd)));
+
     if (requiredValidationFailed) {
       toast.error(
         `Date ${data.FullDay ? "is" : ", Start and End time are"} required.`,
@@ -87,9 +89,9 @@ function AddOffTimings() {
       return false;
     }
 
-    if (
+    if (data.FullDay===false && (
       Date.parse(`${data.Date} ${data.TimeStart}`) >
-      Date.parse(`${data.Date} ${data.TimeEnd}`)
+      Date.parse(`${data.Date} ${data.TimeEnd}`))
     ) {
       toast.error(
         `Start time cannot be greater than End time.`,
@@ -98,11 +100,11 @@ function AddOffTimings() {
       return false;
     }
 
-    if (
+    if (data.FullDay===false && (
       Date.parse(`${data.Date} ${data.TimeStart}`) <
         Date.parse(`${data.Date} 10:00:00`) ||
       Date.parse(`${data.Date} ${data.TimeEnd}`) >
-        Date.parse(`${data.Date} 15:00:00`)
+        Date.parse(`${data.Date} 15:00:00`))
     ) {
       toast.error(
         "Available time should be between 10:00 to 15:00",
@@ -123,16 +125,17 @@ function AddOffTimings() {
   return (
     <>
       <div className="container">
-        <p className="my-4 py-5 display-6">
+        <p className="my-4 pb-2 py-5 display-6">
           Add <span className="text-danger">Off Timings</span>
         </p>
         <hr></hr>
+        <p>Note: By default all days are available between 10:00 AM to 03:00 PM</p>
         <form>
-          <div className="col-md-12 table-box d-flex flex-row justify-content-around flex-wrap">
+          <div className="col-md-12 table-box d-flex flex-row justify-content-around flex-wrap py-2">
             <div className="col-md-3">
               <div className="col-md-12 ">
                 <label htmlFor="offtimeDay" className="mx-0 my-3">
-                  Select Date :
+                <strong>Select Date :</strong>
                 </label>
                 <input
                   type="date"
@@ -175,7 +178,7 @@ function AddOffTimings() {
                   </label>
                 </div>
                 <div className="col-md-12 py-5">
-                  <label htmlFor="addtimestart"> start : </label>
+                  <label htmlFor="addtimestart"> <strong>Start Time : </strong></label>
                   <input
                     type="time"
                     className="input-time mx-2"
@@ -185,7 +188,7 @@ function AddOffTimings() {
                   />
                 </div>
                 <div className="col-md-12 pb-5">
-                  <label htmlFor="add-time-end"> End : </label>
+                  <label htmlFor="add-time-end"> <strong>End Time:</strong> </label>
                   <input
                     type="time"
                     className="input-time mx-2"
@@ -216,16 +219,16 @@ function AddOffTimings() {
                 </div>
               </div>
             </div>
-            <div className="col-md-5 m-5 p-5">
-              <p className="mb-5 fs-4">Off Times(2 weeks)</p>
+            <div className="col-md-5 mx-5 mt-1 pt-1 p-5 border-left-light">
+              <p className="mb-4 fs-4">Off Times(2 weeks)</p>
               <hr/>
               <table className="table py-5">
                 <thead>
                   <tr className="">
-                    <td scope="col" className="p-3">
+                    <td scope="col" className="p-3 fw-500">
                       Date
                     </td>
-                    <td scope="col" className="p-3" colSpan="2">
+                    <td scope="col" className="p-3 fw-500" colSpan="3">
                       Time
                     </td>
                     <td scope="col" className="p-3">
@@ -245,16 +248,15 @@ function AddOffTimings() {
                             {offTiming.FullDay === true ? (
                               <>
                                 <td
-                                  className="p-3 text-danger"
+                                  className="p-3 text-danger border-left-light"
                                   colSpan="3"
                                   key={2}
                                 >
                                   All day off
                                 </td>
-                                <td>
+                                <td className="border-left-light">
                                   <div className="table-icon" title="Delete">
-                                    <Link data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                                    <Link data-bs-toggle="modal" data-bs-target="#exampleModal"
                                       onClick={() =>{
                                         setCurrentSelectedItem(offTiming);
                                     }}
@@ -269,7 +271,7 @@ function AddOffTimings() {
                               </>
                             ) : (
                               <>
-                                <td className="p-3">
+                                <td className="p-3 border-left-light">
                                  {Get12HrsFormat(offTiming.TimeStart)}
                                 </td>
                                 <td className="p-3">
@@ -278,10 +280,9 @@ function AddOffTimings() {
                                 <td className="p-3">
                                  {Get12HrsFormat(offTiming.TimeEnd)}
                                 </td>
-                                <td>
+                                <td className="border-left-light">
                                   <div className="table-icon" title="Delete">
-                                    <Link data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                                    <Link data-bs-toggle="modal" data-bs-target="#exampleModal"
                                       onClick={() =>
                                         setCurrentSelectedItem(offTiming)
                                       } 
