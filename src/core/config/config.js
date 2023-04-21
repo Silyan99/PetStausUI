@@ -1,5 +1,7 @@
+const BASE_URL="https://localhost:7040";
 const config = {
-  BaseAPI: 'https://localhost:7040/api',
+  BaseUrl:BASE_URL,
+  BaseAPI: `${BASE_URL}/api`,
   ToastConfig: {
     position: "top-right",
     autoClose: 3500,

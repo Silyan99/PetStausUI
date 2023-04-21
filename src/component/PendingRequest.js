@@ -57,7 +57,7 @@ function PendingRequest() {
                         <tr>
                           <td className="py-4 px-3">
                             <div className="table-pic">
-                              <img src={`../images/${x.Photo || (x.Category.toLowerCase()==="dog"?"default_dog.png":"default_cat.png")}`} alt="view" />
+                              <img src={`${config.BaseUrl}${x.Photo || (x.Category.toLowerCase()==="dog"?"default_dog.png":"default_cat.png")}`} alt="view" />
                             </div>
                           </td>
                           <td className="py-4 px-3">{x.Uid}</td>

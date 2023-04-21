@@ -10,7 +10,6 @@ function PetDetails() {
   const [details, setDetails] = useState({});
   
   const GetRequestDetails = () => {
-    
     service
       .get(UrlConstant.Customer_GetRequestDetailURL(id))
       .then((response) => {
@@ -31,10 +30,14 @@ function PetDetails() {
     service.deleteApi(UrlConstant.Admin_DeleteRequest(id)).then(response=>{
         if (response.status === 200) {
             toast.success("Request deleted", config.ToastConfig);
+            setTimeout(() => {
+              window.location.href = "/customer/myrequests";
+          }, 2000);
         }
-        setTimeout(() => {
-            window.location.href = "/customer/myrequests";
-        }, 2000);
+        else{
+          toast.error("Failed to delete Pet details", config.ToastConfig);
+        }
+
     }).catch(err=>{
         toast.error("Failed to delete Pet details", config.ToastConfig);
         console.log(err);
@@ -43,7 +46,7 @@ function PetDetails() {
 
   useEffect(() => {
       GetRequestDetails(); 
-  }, []);
+  },[]);
 
   return (
     <>
@@ -59,7 +62,7 @@ function PetDetails() {
           >
             <div className="col-md-6 d-flex justify-content-center align-item-center ">
             <img
-              src={`/../images/${details.Photo || (details.Category && details.Category.toLowerCase()==="dog" ? "default_dog.png":"default_cat.png")}`}
+              src={`${config.BaseUrl}${details.Photo || (details.Category && details.Category.toLowerCase()==="dog" ? "default_dog.png":"default_cat.png")}`}
               className="img-fluid rounded"
               alt="..."
             />

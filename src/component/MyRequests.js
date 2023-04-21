@@ -62,13 +62,14 @@ function MyRequests() {
                           <td className="py-4  text-center">{x.Status}</td>
                           <td className="py-4  text-center">{x.Remarks}</td>
                           <td className="py-4  text-center">
+                            <div className="table-icon">
                             <Link to={`/customer/petdetails/${x.PetId}`}>
-                              <img
-                                className="table-icon"
+                              <img className="table-icon"
                                 src="../images/view.png"
                                 alt="view"
                               />
                             </Link>
+                            </div>
                           </td>
                         </tr>
                       </>

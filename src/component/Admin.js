@@ -74,7 +74,7 @@ function Admin() {
         >
           <div className="pet-image col-md-6 d-flex justify-content-center align-item-center ">
             <img
-              src={`/../images/${petDetails.Photo || (petDetails.Category && petDetails.Category.toLowerCase()==="dog" ? "default_dog.png":"default_cat.png")}`}
+              src={`${config.BaseUrl}${petDetails.Photo || (petDetails.Category && petDetails.Category.toLowerCase()==="dog" ? "default_dog.png":"default_cat.png")}`}
               className="img-fluid rounded"
               alt="..."
             />

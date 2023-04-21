@@ -189,6 +189,7 @@ function Appointment() {
                   className="form-check-input mx-1"
                   type="radio"
                   name="Vaccinated"
+                  checked
                   id="petVaccinatedTrue"
                   value="true"
                 />
