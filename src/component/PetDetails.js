@@ -109,7 +109,9 @@ function PetDetails() {
                   </span>
                 </p>
                 <p className="card-text mx-3 mt-4">
-                  <button type="button" className="btn btn-outline-primary ">
+                  <button type="button" className="btn btn-outline-primary" onClick={()=>{
+                    window.location.href=`/customer/updatepetdetails/${id}`;
+                  }}>
                     Edit
                   </button>
                   <button

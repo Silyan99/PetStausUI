@@ -23,6 +23,10 @@ const Get12HrsFormat = (timeString) => {
   );
 };
 
+const GetTimeForTimeControl=(val:String)=>{
+  return val.substring(0,5);
+}
+
 const ValidateEmail = (email) => {
   return String(email)
     .toLowerCase()
@@ -43,4 +47,4 @@ const RandomString =(length)=> {
   return result;
 }
 
-export { FormsOperations,IsNullEmptyOfUndefined,Get12HrsFormat,ValidateEmail,RandomString};
+export { FormsOperations,IsNullEmptyOfUndefined,Get12HrsFormat,ValidateEmail,RandomString,GetTimeForTimeControl};

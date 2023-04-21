@@ -15,6 +15,7 @@ import AddOffTimings from "./component/AddOffTimings";
 import { ProtectedAdminRoute, ProtectedCustomerRoute } from "./core/authsecurity";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import UpdatePetDetails from "./component/UpdatePetDetails";
 
 function App() {
   
@@ -35,6 +36,7 @@ function App() {
           </Route>
           <Route path="/customer/" element={<ProtectedCustomerRoute/>}>
             <Route path="petdetails/:id" element={<PetDetails />}></Route>
+            <Route path="updatepetdetails/:id" element={<UpdatePetDetails />}></Route>
             <Route path="user" element={<User />}></Route>
             <Route path="appointment" element={<Appointment />}></Route>
             <Route path="myrequests" element={<MyRequests />}></Route>
