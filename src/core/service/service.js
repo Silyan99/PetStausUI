@@ -46,6 +46,20 @@ export const postformdata =(url,data)=>{
     return postPromise;
 }
 
+export const postformdataupdate =(url,data)=>{
+    let form = new FormData();
+    let keysArray = Object.keys(data);
+    for (let index = 0; index < keysArray.length; index++) {
+       form.append(`details.${keysArray[index]}`, data[keysArray[index]]);
+    }
+    serviceConfig.headers["Content-Type"] = "multipart/form-data";
+    const postPromise = baseAPI.post(url, form, serviceConfig);
+    toast.promise(postPromise, {
+        pending: "Processing...",
+    });
+    return postPromise;
+}
+
 export const post = (url, data) => {
     const postPromise = baseAPI.post(url, data, serviceConfig);
     toast.promise(postPromise, {

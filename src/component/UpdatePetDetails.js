@@ -4,7 +4,7 @@ import * as service from "../core/service/service";
 import UrlConstant from "../constants/UrlConstant";
 import { toast } from "react-toastify";
 import config from "../core/config/config";
-import { Get12HrsFormat, GetTimeForTimeControl } from "../core/interactiveforms";
+import { GetTimeForTimeControl, ValidateAllFields } from "../core/interactiveforms";
 function UpdatePetDetails() {
   let { id } = useParams();
   const [Details, setDetails] = useState("");
@@ -52,22 +52,61 @@ function UpdatePetDetails() {
         toast.error("Failed to load Pet details", config.ToastConfig);
         console.log(error);
       });
-  };
+  }
 
   const OnUpdateClick = ()=>{
-    service.put(UrlConstant.Customer_UpdateRequest(id)).then(response=>{
+    var data = {
+      Id: parseInt(id),
+      Category: Category,
+      Uid: Uid,
+      Name: Name,
+      Age: Age,
+      Gender: Gender,
+      Vaccinated: Vaccinated,
+      Color: Color,
+      Breed: Breed,
+      Details: Details,
+      PhotoFile: new File(["foo"], "foo.txt", {
+        type: "text/plain",
+      }),
+      Photo: "DummyPhoto",
+      DateFrom: DateFrom,
+      DateTo: DateTo,
+      TimeFrom: `${TimeFrom.substring(0,5)}:00`,
+      TimeTo: `${TimeTo.substring(0,5)}:00`
+    }
+    if (!ValidateAllFields(data)) {
+      return;
+    }
+
+    if(DateFrom === DateTo){
+      toast.error("From and To dates should be different.", config.ToastConfig);
+      return;
+    }
+
+    if(DateFrom > DateTo){
+      toast.error("From date cannot be greater than To date.", config.ToastConfig);
+      return;
+    }
+
+    service.postformdata(UrlConstant.Customer_UpdateRequest(id), data).then(response=>{
         if (response.status === 200) {
-            toast.success("Request deleted", config.ToastConfig);
+          if(response.data.Status===true){
+            toast.success("Request updated", config.ToastConfig);
             setTimeout(() => {
               window.location.href = "/customer/myrequests";
-          }, 2000);
+            }, 2000);
+          }
+          else{
+            toast.error(response.data.Message, config.ToastConfig);
+          }
         }
-        else{
-          toast.error("Failed to delete Pet details", config.ToastConfig);
+        else {
+          toast.error("Failed to Update Pet details", config.ToastConfig);
         }
 
     }).catch(err=>{
-        toast.error("Failed to delete Pet details", config.ToastConfig);
+        toast.error("Failed to Update Pet details", config.ToastConfig);
         console.log(err);
     });
   }
@@ -183,7 +222,7 @@ function UpdatePetDetails() {
                 </p>
                 <p className="h6 m-3">
                   Details : 
-                  <textarea className="form-control col-md-12 my-3" value={Details} onClick={(ev)=>{ setDetails(ev.target.value) }} id="exampleFormControlTextarea1" name="Details" rows="3" ></textarea>
+                  <textarea className="form-control col-md-12 my-3" value={Details} onChange={(ev)=>{ setDetails(ev.target.value) }} id="exampleFormControlTextarea1" name="Details" rows="3" ></textarea>
                 </p>
                 <p className="card-text mx-3 mt-4">
                   <button type="button" onClick={()=>{OnUpdateClick();}} className="btn btn-outline-primary ">
@@ -192,18 +231,17 @@ function UpdatePetDetails() {
                   <button
                     type="button"
                     className="btn btn-outline-danger mx-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
+                    onClick={()=>{window.location.reload();}}
                   >
                     Cancel
                   </button>
-                  <Link
+                  <button
                     type="button"
-                    className="btn btn-outline-primary"
-                    to={`/customer/petdetails/${id}`}
+                    className="btn btn-outline-danger mx-2"
+                    onClick={()=>{window.history.back();}}
                   >
                     Back
-                  </Link>
+                  </button>                  
                 </p>
               </div>
             </div>

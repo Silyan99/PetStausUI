@@ -1,57 +1,83 @@
-import React from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 import * as service from "../core/service/service";
 import UrlConstant from "../constants/UrlConstant";
 import { toast } from "react-toastify";
 import config from "../core/config/config";
 import { useEffect } from "react";
-import { Get12HrsFormat, RandomString } from "../core/interactiveforms";
+import { Get12HrsFormat, RandomString, ValidateAllFields } from "../core/interactiveforms";
 
 function Appointment() {
   const [imageSrc, setImageSrc] = useState("");
   const [adminAvailableTimes, setAdminAvailableTimes] = useState([]);
+  let modalButton = useRef(null);
 
-  const SaveRequest = () => {
+  const ValidateAndSubmit = (isSubmit) => {
     const {
       Uid, Name, Age, Gender, Vaccinated, Color, Breed, Details, PhotoFile, DateFrom, DateTo, TimeFrom, TimeTo
     } = document.forms[0];
     const Category =  document.getElementsByName("Category");
-    service
-      .postformdata(UrlConstant.Admin_AddRequest, {
-        Category:Array.prototype.slice.call(Category).find(x=>x.checked).value,
-        Uid:Uid.value,
-        Name:Name.value,
-        Age:Age.value,
-        Gender:Array.prototype.slice.call(Gender).find(x=>x.checked).value,
-        Vaccinated:Array.prototype.slice.call(Vaccinated).find(x=>x.checked).value,
-        Color:Color.value,
-        Breed:Breed.value,
-        Details:Details.value,
-        PhotoFile:PhotoFile.files[0],
-        Photo: imageSrc,
-        DateFrom:DateFrom.value,
-        DateTo:DateTo.value,
-        TimeFrom:TimeFrom.value,
-        TimeTo:TimeTo.value
-      })
-      .then((response) => {
-        if (response.status === 200) {
-          toast.success("Request created successfully.", config.ToastConfig);
-          setTimeout(() => {
-            window.location.href = "/customer/myrequests";
-          }, 1500);
-        } else {
+    const dataToSend = {
+      Category:Array.prototype.slice.call(Category).find(x=>x.checked).value,
+      Name:Name.value,
+      Color:Color.value,
+      Age:Age.value,
+      Breed:Breed.value,
+      Uid:Uid.value,
+      PhotoFile:PhotoFile.files[0],
+      Details:Details.value,
+      DateFrom:DateFrom.value,
+      TimeFrom:TimeFrom.value,
+      DateTo:DateTo.value,
+      TimeTo:TimeTo.value,
+      Gender:Array.prototype.slice.call(Gender).find(x=>x.checked).value,
+      Vaccinated:Array.prototype.slice.call(Vaccinated).find(x=>x.checked).value,
+      Photo: imageSrc
+    };
+
+    if(!ValidateAllFields(dataToSend))
+      return;
+
+    if(PhotoFile.files.length < 1){
+      toast.error("Please update photo.", config.ToastConfig);
+      return;
+    }
+
+    if(dataToSend.DateFrom === dataToSend.DateTo){
+      toast.error("From and To dates should be different.", config.ToastConfig);
+      return;
+    }
+
+    if(dataToSend.DateFrom > dataToSend.DateTo){
+      toast.error("From date should be earlier than To date.", config.ToastConfig);
+      return;
+    }
+
+    if(isSubmit===true){
+      service
+        .postformdata(UrlConstant.Admin_AddRequest, dataToSend)
+        .then((response) => {
+          if (response.status === 200) {
+            toast.success("Request created successfully.", config.ToastConfig);
+            setTimeout(() => {
+              window.location.href = "/customer/myrequests";
+            }, 1500);
+          } else {
+            toast.error("Error saving request.", config.ToastConfig);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
           toast.error("Error saving request.", config.ToastConfig);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Error saving request.", config.ToastConfig);
-      });
+        });
+    }
+    else{
+      modalButton.click();
+    }
   };
 
   const ClearInput = () => {
-    document.forms[0]["petPhoto"].value = null;
+    document.forms[0]["PhotoFile"].value = null;
     setImageSrc("");
   };
 
@@ -359,12 +385,18 @@ function Appointment() {
                 Check Availability
               </button>
               <button
-                type="button"
+                type="button" onClick={()=> ValidateAndSubmit(false)}
                 className="btn btn-primary w-45p"
+              >
+                Next
+              </button>
+              <button ref={el=> modalButton = el}
+                type="button"
+                className="btn btn-primary w-45p d-none"
                 data-bs-toggle="modal"
                 data-bs-target="#exampleModal1"
               >
-                Next
+                Open Modal
               </button>
               <button
                 type="button"
@@ -563,7 +595,7 @@ function Appointment() {
                   <button
                     type="button"
                     onClick={() => {
-                      SaveRequest();
+                      ValidateAndSubmit(true);
                     }}
                     className="btn btn-outline-primary px-5"
                   >

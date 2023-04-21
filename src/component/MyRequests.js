@@ -92,13 +92,6 @@ function MyRequests() {
               Add new request
             </button>
           </Link>
-          <button
-            className="btn btn-outline-primary px-4 "
-            data-bs-toggle="modal"
-            data-bs-target="#exampleModal"
-          >
-            Next
-          </button>
         </div>
 
         
