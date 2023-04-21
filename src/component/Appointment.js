@@ -1,7 +1,93 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import * as service from "../core/service/service";
+import UrlConstant from "../constants/UrlConstant";
+import { toast } from "react-toastify";
+import config from "../core/config/config";
+import { useEffect } from "react";
+import { Get12HrsFormat, RandomString } from "../core/interactiveforms";
 
 function Appointment() {
+  const [imageSrc, setImageSrc] = useState("");
+  const [adminAvailableTimes, setAdminAvailableTimes] = useState([]);
+
+  const SaveRequest = () => {
+    const {
+      Uid, Name, Age, Gender, Vaccinated, Color, Breed, Details, PhotoFile, DateFrom, DateTo, TimeFrom, TimeTo
+    } = document.forms[0];
+    const Category =  document.getElementsByName("Category");
+    service
+      .postformdata(UrlConstant.Admin_AddRequest, {
+        Category:Array.prototype.slice.call(Category).find(x=>x.checked).value,
+        Uid:Uid.value,
+        Name:Name.value,
+        Age:Age.value,
+        Gender:Array.prototype.slice.call(Gender).find(x=>x.checked).value,
+        Vaccinated:Array.prototype.slice.call(Vaccinated).find(x=>x.checked).value,
+        Color:Color.value,
+        Breed:Breed.value,
+        Details:Details.value,
+        PhotoFile:PhotoFile.files[0],
+        Photo: imageSrc,
+        DateFrom:DateFrom.value,
+        DateTo:DateTo.value,
+        TimeFrom:TimeFrom.value,
+        TimeTo:TimeTo.value
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("Request created successfully.", config.ToastConfig);
+          setTimeout(() => {
+            window.location.href = "/customer/myrequests";
+          }, 1500);
+        } else {
+          toast.error("Error saving request.", config.ToastConfig);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error("Error saving request.", config.ToastConfig);
+      });
+  };
+
+  const ClearInput = () => {
+    document.forms[0]["petPhoto"].value = null;
+    setImageSrc("");
+  };
+
+  const OnImageUpload = (ev) => {
+    const [file] = ev.target.files;
+    if (file) {
+      setImageSrc(URL.createObjectURL(file));
+    }
+  };
+
+  const GetAvailableTimings = () => {
+    service
+      .get(UrlConstant.Customer_OffTimingsAdmin(1)) //admin id is always 1
+      .then((response) => {
+        if (response.status === 200) {
+          setAdminAvailableTimes(response.data);
+        } else {
+          toast.error(
+            "Failed to load admin available Timings",
+            config.ToastConfig
+          );
+        }
+      })
+      .catch((error) => {
+        toast.error(
+          "Failed to load admin available Timings",
+          config.ToastConfig
+        );
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    GetAvailableTimings();
+  }, []);
+
   return (
     <>
       <div className="container my-3 py-4">
@@ -12,27 +98,17 @@ function Appointment() {
         <div className="d-flex justify-content-center mt-5">
           <div className="pet-radio-inputs my-3 col-md-12">
             <label className="pet-radio">
-              <input type="radio" name="petCategory" checked value="Dog" />
+              <input type="radio" name="Category" checked value="Dog" />
               <span className="name">Dog</span>
             </label>
             <label className="pet-radio">
-              <input type="radio" name="petCategory" value="Cat" />
+              <input type="radio" name="Category" value="Cat" />
               <span className="name">Cat</span>
             </label>
+            
           </div>
         </div>
-        {/* <div className="col-md-12 ">
-          <label htmlFor="inputEmail4" className="form-label">
-            Number of pets that would like to bring to the daycare
-          </label>
-          <input
-            type="number"
-            className="mx-2 input-time"
-            id="inputEmail4"
-            required
-          />
-        </div> */}
-        <div className="container  form-box">
+        <div className="container form-box">
           <form className=" row my-5">
             <div className="col-md-6 mb-3 my-4 text-start">
               <label htmlFor="petname" className="form-label">
@@ -42,12 +118,13 @@ function Appointment() {
                 type="text"
                 className="form-control"
                 id="petname"
-                name="petname"
+                name="Name"
                 placeholder=""
                 required
               />
             </div>
             <div className="col-md-6 my-2 d-flex flex-row align-items-center pt-4">
+            <input type="hidden" name="Uid" value={RandomString(5)}></input>
               <label className="form-check-label mt-3" htmlFor="petGender">
                 Gender :
               </label>
@@ -56,7 +133,7 @@ function Appointment() {
                   <input
                     className="form-check-input"
                     type="radio"
-                    name="petGender"
+                    name="Gender"
                     id="petGenderMale"
                     value="male"
                     checked
@@ -71,7 +148,7 @@ function Appointment() {
                   <input
                     className="form-check-input"
                     type="radio"
-                    name="petGender"
+                    name="Gender"
                     id="petGenderFemale"
                     value="female"
                   />
@@ -89,7 +166,7 @@ function Appointment() {
                 type="text"
                 className="form-control"
                 id="petcolor"
-                name="petColor"
+                name="Color"
                 placeholder=""
                 required
               />
@@ -111,7 +188,7 @@ function Appointment() {
                 <input
                   className="form-check-input mx-1"
                   type="radio"
-                  name="petVaccination"
+                  name="Vaccinated"
                   id="petVaccinatedTrue"
                   value="true"
                 />
@@ -123,7 +200,7 @@ function Appointment() {
                 <input
                   className="form-check-input mx-1"
                   type="radio"
-                  name="petVaccination"
+                  name="Vaccinated"
                   id="petVaccinatedFalse"
                   value="false"
                 />
@@ -157,6 +234,7 @@ function Appointment() {
                 type="text"
                 className="form-control"
                 id="petBreed"
+                name="Breed"
                 placeholder=""
                 required
               />
@@ -164,11 +242,13 @@ function Appointment() {
 
             <div className="file-uploader border col-md-12 my-4 rounded-2">
               <div className="col-md-3 ">
-                <img
-                  src="../images/200-4.jpg"
-                  className="img-thumbnail border-0 mx-0"
-                  alt="..."
-                />
+                {imageSrc !== "" && (
+                  <img
+                    src={imageSrc}
+                    className="img-thumbnail border-0 mx-0"
+                    alt="..."
+                  />
+                )}
               </div>
               <div className="col-md-9 sub-file-uploder px-3 border-0 my-3">
                 <div className=" d-flex justify-content-between">
@@ -178,15 +258,20 @@ function Appointment() {
                     id="inputGroupFile04"
                     aria-describedby="inputGroupFileAddon04"
                     aria-label="Upload"
-                    name="petPhoto"
+                    name="PhotoFile"
+                    onChange={(evt) => {
+                      OnImageUpload(evt);
+                    }}
                     required
                   />
                   <button
                     className="btn btn-outline-secondary border-secondary "
                     type="button"
-                    id="inputGroupFileAddon04"
+                    onClick={() => {
+                      ClearInput();
+                    }}
                   >
-                    Upload
+                    Clear
                   </button>
                 </div>
               </div>
@@ -206,12 +291,12 @@ function Appointment() {
               <textarea
                 className="form-control col-md-12"
                 id="exampleFormControlTextarea1"
-                name="petDetail"
+                name="Details"
                 rows="3"
               ></textarea>
             </div>
 
-            <p className="text-start my-4"> Pet Pick-Up and Drop Date:</p>
+            <p className="text-start my-4"> Pet Pick-Up and Drop:</p>
             <div className="col-md-6 my-3 text-start">
               <label htmlFor="dropDate" className="mx-0">
                 {" "}
@@ -221,7 +306,7 @@ function Appointment() {
                 type="date"
                 className="input-time mx-3"
                 id="dropDate"
-                name="dropDate"
+                name="DateFrom"
                 required
               />
             </div>
@@ -231,7 +316,7 @@ function Appointment() {
                 type="time"
                 className="input-time mx-2"
                 id="dropTime"
-                name="dropTime"
+                name="TimeFrom"
                 min="10:00"
                 max="15:00"
                 required
@@ -245,7 +330,7 @@ function Appointment() {
                 type="date"
                 className="input-time mx-3"
                 id="pickDate"
-                name="pickDate"
+                name="DateTo"
                 required
               />
             </div>
@@ -256,23 +341,237 @@ function Appointment() {
                 type="time"
                 className="input-time mx-2"
                 id="pickupTime"
-                name="pickupTime"
+                name="TimeTo"
                 min="10:00"
                 max="15:00"
                 required
               />
             </div>
-            
-              <div className="col-md-8 d-grid gap-2 mx-auto my-5 d-flex">
-                <button type="button" className="btn btn-primary w-45p">
-                  Next
-                </button>
-                <button type="button" onClick={()=>{window.location.reload();}} className="btn btn-primary w-45p">
-                  Cancel
-                </button>
-              </div>
-            
+
+            <div className="col-md-8 d-grid gap-2 mx-auto my-5 d-flex">
+              <button
+                type="button"
+                className="btn btn-primary w-45p"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Check Availability
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary w-45p"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal1"
+              >
+                Next
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  window.location.reload();
+                }}
+                className="btn btn-primary w-45p"
+              >
+                Cancel
+              </button>
+            </div>
           </form>
+        </div>
+        <div>
+          {/* modal availability*/}
+          <div
+            className="modal fade"
+            id="exampleModal"
+            tabIndex={-1}
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="exampleModalLabel">
+                    Admin Available times
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  />
+                </div>
+                <div className="modal-body ">
+                  <div className="my-2 height-60vh">
+                    <table>
+                      <tr>
+                        <td>
+                          <strong>Date</strong>
+                        </td>
+                        <td>
+                          <strong>Available Time</strong>
+                        </td>
+                      </tr>
+                      {adminAvailableTimes.length > 0 ? (
+                        adminAvailableTimes.map((timing) => {
+                          return (
+                            <>
+                              <tr>
+                                <td>
+                                  {new Date(
+                                    timing.Date.split(" ")[0]
+                                  ).toDateString()}
+                                </td>
+                                <td>
+                                  {timing.FullDay
+                                    ? "No time available"
+                                    : `${Get12HrsFormat(
+                                        timing.TimeStart
+                                      )} to ${Get12HrsFormat(timing.TimeEnd)}`}
+                                </td>
+                              </tr>
+                            </>
+                          );
+                        })
+                      ) : (
+                        <>
+                          <tr>
+                            <td colSpan={2}>Not found</td>
+                          </tr>
+                        </>
+                      )}
+                    </table>
+                  </div>
+                  <div className="text-end mt-4 px-4">
+                    <button
+                      type="button"
+                      className="btn btn-outline-primary mx-3"
+                      data-bs-dismiss="modal"
+                    >
+                      Okay
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Modal Pricing */}
+          <div
+            className="modal fade"
+            id="exampleModal1"
+            tabIndex={-1}
+            aria-labelledby="exampleModal1Label"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog modal-xl">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="exampleModal1Label">
+                    Pricing
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  />
+                </div>
+                <div className="modal-body ">
+                  <div className=" row m-5 d-flex flex-wrap my-5 py-5">
+                    <div className="col-md-3 my-4 ">
+                      <div className="card border-1">
+                        <div className="card-body text-center ">
+                          <h5 className="card-title fs-3 fw- mb-4">Standard</h5>
+                          <p className="card-text">
+                            {" "}
+                            <strong>$40</strong> <sup>95</sup> per night
+                          </p>
+                          <p className="card-text"> + </p>
+                          <p className="card-text">
+                            {" "}
+                            <strong>$13</strong> per day
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-md-3 my-4 ">
+                      <div
+                        className="card border-0"
+                        style={{ backgroundColor: "rgb(255, 255, 222)" }}
+                      >
+                        <div className="card-body text-center">
+                          <h5 className="card-title fs-3 fw- mb-4">Enhanced</h5>
+                          <p className="card-text">
+                            {" "}
+                            <strong>$40</strong> <sup>95</sup> per night
+                          </p>
+                          <p className="card-text"> + </p>
+                          <p className="card-text">
+                            {" "}
+                            <strong>$23.00</strong> per day
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="col-md-3 my-4 ">
+                      <div
+                        className="card border-0"
+                        style={{ backgroundColor: " rgb(237, 237, 237)" }}
+                      >
+                        <div className="card-body text-center">
+                          <h5 className="card-title fs-3 fw- mb-4">
+                            Comprehensive
+                          </h5>
+                          <p className="card-text">
+                            {" "}
+                            <strong>$40</strong> <sup>95</sup> per night
+                          </p>
+                          <p className="card-text"> + </p>
+                          <p className="card-text">
+                            {" "}
+                            <strong>$33.00</strong> per day
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="col-md-3 my-4 ">
+                      <div
+                        className="card border-0 "
+                        style={{ backgroundColor: " rgb(255, 225, 178)" }}
+                      >
+                        <div className="card-body text-center">
+                          <h5 className="card-title fs-3 fw- mb-4">
+                            All-Inclusive
+                          </h5>
+                          <p className="card-text">
+                            {" "}
+                            <strong>$40</strong> <sup>95</sup> per night
+                          </p>
+                          <p className="card-text"> + </p>
+                          <p className="card-text">
+                            {" "}
+                            <strong>$13</strong> per day
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      SaveRequest();
+                    }}
+                    className="btn btn-outline-primary px-5"
+                  >
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>

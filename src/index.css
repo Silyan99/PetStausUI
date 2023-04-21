@@ -573,3 +573,8 @@ td,th{
 .fw-500{
   font-weight: 500;
 }
+
+.height-60vh{
+  max-height: 60vh;
+  overflow-y: scroll;
+}

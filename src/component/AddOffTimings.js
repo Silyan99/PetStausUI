@@ -12,11 +12,21 @@ function AddOffTimings() {
   const [currentSelectedItem, setCurrentSelectedItem] = useState({});
 
   const OnDeleteClick = () => {
-    // currentSelectedItem.Id;//todo
-    toast.success(`${new Date(currentSelectedItem.Date).toDateString()} deleted.`,config.ToastConfig);
-    setTimeout(() => {
-        window.location.reload();
-    }, 1000);
+    service.deleteApi(UrlConstant.Admin_DeleteAvailability(currentSelectedItem.Id)).then(response=>{
+      if(response.status===200){
+        toast.success(`${new Date(currentSelectedItem.Date).toDateString()}'s timing deleted.`, config.ToastConfig);
+        setTimeout(() => {
+            window.location.reload();
+        }, 1500);
+      }
+      else{
+        toast.error(`Error deleting timings. Please try again.`, config.ToastConfig);
+      }
+    }).catch(error=>{
+      console.log(error);
+      toast.error(`Error deleting timings. Please try again.`, config.ToastConfig);
+    })
+
   };
 
   const GetOffTimings = () => {
@@ -115,8 +125,6 @@ function AddOffTimings() {
 
     return true;
   };
-
-  
 
   useEffect(() => {
     GetOffTimings();
@@ -242,7 +250,7 @@ function AddOffTimings() {
                       return (
                         <>
                           <tr key={i}>
-                            <td className="p-3" scope="row" key={1}>
+                            <td className="p-3" scope="row">
                               {new Date(offTiming.Date).toDateString()}
                             </td>
                             {offTiming.FullDay === true ? (
@@ -250,7 +258,6 @@ function AddOffTimings() {
                                 <td
                                   className="p-3 text-danger border-left-light"
                                   colSpan="3"
-                                  key={2}
                                 >
                                   All day off
                                 </td>
@@ -312,6 +319,7 @@ function AddOffTimings() {
             </div>
           </div>
         </form>
+        {/* modal */}
         <div
           className="modal fade"
           id="exampleModal"
@@ -334,7 +342,7 @@ function AddOffTimings() {
               </div>
               <div className="modal-body ">
                 <div className="my-2">
-                  Are you sure you want to delete your Request?
+                  Are you sure you want to delete timing?
                 </div>
                 <div className="text-end mt-4 px-4">
                   <button
