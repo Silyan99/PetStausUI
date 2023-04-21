@@ -27,7 +27,7 @@ function PetDetails() {
   };
 
   const OnDeleteClick = ()=>{
-    service.deleteApi(UrlConstant.Admin_DeleteRequest(id)).then(response=>{
+    service.deleteApi(UrlConstant.Customer_DeleteRequest(id)).then(response=>{
         if (response.status === 200) {
             toast.success("Request deleted", config.ToastConfig);
             setTimeout(() => {

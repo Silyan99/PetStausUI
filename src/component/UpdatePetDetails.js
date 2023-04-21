@@ -54,23 +54,23 @@ function UpdatePetDetails() {
       });
   };
 
-  // const OnDeleteClick = ()=>{
-  //   service.deleteApi(UrlConstant.Admin_DeleteRequest(id)).then(response=>{
-  //       if (response.status === 200) {
-  //           toast.success("Request deleted", config.ToastConfig);
-  //           setTimeout(() => {
-  //             window.location.href = "/customer/myrequests";
-  //         }, 2000);
-  //       }
-  //       else{
-  //         toast.error("Failed to delete Pet details", config.ToastConfig);
-  //       }
+  const OnUpdateClick = ()=>{
+    service.put(UrlConstant.Customer_UpdateRequest(id)).then(response=>{
+        if (response.status === 200) {
+            toast.success("Request deleted", config.ToastConfig);
+            setTimeout(() => {
+              window.location.href = "/customer/myrequests";
+          }, 2000);
+        }
+        else{
+          toast.error("Failed to delete Pet details", config.ToastConfig);
+        }
 
-  //   }).catch(err=>{
-  //       toast.error("Failed to delete Pet details", config.ToastConfig);
-  //       console.log(err);
-  //   });
-  // }
+    }).catch(err=>{
+        toast.error("Failed to delete Pet details", config.ToastConfig);
+        console.log(err);
+    });
+  }
 
   useEffect(() => {
       GetRequestDetails(); 
@@ -165,7 +165,7 @@ function UpdatePetDetails() {
                   <textarea className="form-control col-md-12" value={Details} onClick={(ev)=>{ setDetails(ev.target.value) }} id="exampleFormControlTextarea1" name="Details" rows="3" ></textarea>
                 </p>
                 <p className="card-text mx-3 mt-4">
-                  <button type="button" className="btn btn-outline-primary ">
+                  <button type="button" onClick={()=>{OnUpdateClick();}} className="btn btn-outline-primary ">
                     Update
                   </button>
                   <button
