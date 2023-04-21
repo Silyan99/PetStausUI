@@ -5,7 +5,11 @@ import UrlConstant from "../constants/UrlConstant";
 import { toast } from "react-toastify";
 import config from "../core/config/config";
 import { useEffect } from "react";
-import { Get12HrsFormat, RandomString, ValidateAllFields } from "../core/interactiveforms";
+import {
+  Get12HrsFormat,
+  RandomString,
+  ValidateAllFields,
+} from "../core/interactiveforms";
 
 function Appointment() {
   const [imageSrc, setImageSrc] = useState("");
@@ -14,54 +18,77 @@ function Appointment() {
 
   const ValidateAndSubmit = (isSubmit) => {
     const {
-      Uid, Name, Age, Gender, Vaccinated, Color, Breed, Details, PhotoFile, DateFrom, DateTo, TimeFrom, TimeTo
+      Uid,
+      Name,
+      Age,
+      Gender,
+      Vaccinated,
+      Color,
+      Breed,
+      Details,
+      PhotoFile,
+      DateFrom,
+      DateTo,
+      TimeFrom,
+      TimeTo,
     } = document.forms[0];
-    const Category =  document.getElementsByName("Category");
+    const Category = document.getElementsByName("Category");
     const dataToSend = {
-      Category:Array.prototype.slice.call(Category).find(x=>x.checked).value,
-      Name:Name.value,
-      Color:Color.value,
-      Age:Age.value,
-      Breed:Breed.value,
-      Uid:Uid.value,
-      PhotoFile:PhotoFile.files[0],
-      Details:Details.value,
-      DateFrom:DateFrom.value,
-      TimeFrom:TimeFrom.value,
-      DateTo:DateTo.value,
-      TimeTo:TimeTo.value,
-      Gender:Array.prototype.slice.call(Gender).find(x=>x.checked).value,
-      Vaccinated:Array.prototype.slice.call(Vaccinated).find(x=>x.checked).value,
-      Photo: imageSrc
+      Category: Array.prototype.slice.call(Category).find((x) => x.checked)
+        .value,
+      Name: Name.value,
+      Color: Color.value,
+      Age: Age.value,
+      Breed: Breed.value,
+      Uid: Uid.value,
+      PhotoFile: PhotoFile.files[0],
+      Details: Details.value,
+      DateFrom: DateFrom.value,
+      TimeFrom: TimeFrom.value,
+      DateTo: DateTo.value,
+      TimeTo: TimeTo.value,
+      Gender: Array.prototype.slice.call(Gender).find((x) => x.checked).value,
+      Vaccinated: Array.prototype.slice.call(Vaccinated).find((x) => x.checked)
+        .value,
+      Photo: imageSrc,
     };
 
-    if(!ValidateAllFields(dataToSend))
-      return;
+    if (!ValidateAllFields(dataToSend)) return;
 
-    if(PhotoFile.files.length < 1){
+    if (PhotoFile.files.length < 1) {
       toast.error("Please update photo.", config.ToastConfig);
       return;
     }
 
-    if(dataToSend.DateFrom === dataToSend.DateTo){
+    if (dataToSend.DateFrom === dataToSend.DateTo) {
       toast.error("From and To dates should be different.", config.ToastConfig);
       return;
     }
 
-    if(dataToSend.DateFrom > dataToSend.DateTo){
-      toast.error("From date should be earlier than To date.", config.ToastConfig);
+    if (dataToSend.DateFrom > dataToSend.DateTo) {
+      toast.error(
+        "From date should be earlier than To date.",
+        config.ToastConfig
+      );
       return;
     }
 
-    if(isSubmit===true){
+    if (isSubmit === true) {
       service
         .postformdata(UrlConstant.Admin_AddRequest, dataToSend)
         .then((response) => {
           if (response.status === 200) {
-            toast.success("Request created successfully.", config.ToastConfig);
-            setTimeout(() => {
-              window.location.href = "/customer/myrequests";
-            }, 1500);
+            if (response.data.Status === true) {
+              toast.success(
+                "Request created successfully.",
+                config.ToastConfig
+              );
+              setTimeout(() => {
+                window.location.href = "/customer/myrequests";
+              }, 1500);
+            } else {
+              toast.error(response.data.Message, config.ToastConfig);
+            }
           } else {
             toast.error("Error saving request.", config.ToastConfig);
           }
@@ -70,8 +97,7 @@ function Appointment() {
           console.log(error);
           toast.error("Error saving request.", config.ToastConfig);
         });
-    }
-    else{
+    } else {
       modalButton.click();
     }
   };
@@ -131,7 +157,6 @@ function Appointment() {
               <input type="radio" name="Category" value="Cat" />
               <span className="name">Cat</span>
             </label>
-            
           </div>
         </div>
         <div className="container form-box">
@@ -150,7 +175,7 @@ function Appointment() {
               />
             </div>
             <div className="col-md-6 my-2 d-flex flex-row align-items-center pt-4">
-            <input type="hidden" name="Uid" value={RandomString(5)}></input>
+              <input type="hidden" name="Uid" value={RandomString(5)}></input>
               <label className="form-check-label mt-3" htmlFor="petGender">
                 Gender :
               </label>
@@ -385,12 +410,14 @@ function Appointment() {
                 Check Availability
               </button>
               <button
-                type="button" onClick={()=> ValidateAndSubmit(false)}
+                type="button"
+                onClick={() => ValidateAndSubmit(false)}
                 className="btn btn-primary w-45p"
               >
                 Next
               </button>
-              <button ref={el=> modalButton = el}
+              <button
+                ref={(el) => (modalButton = el)}
                 type="button"
                 className="btn btn-primary w-45p d-none"
                 data-bs-toggle="modal"
