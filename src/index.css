@@ -505,7 +505,9 @@ td,th{
     padding: 0;
   }
   
-  
+  .d-t{
+    margin: 0;
+  }
 }
 .dropbtn {
   background-color: #04AA6D;
@@ -553,11 +555,30 @@ td,th{
   width: 50vw;
 }
 @media only screen and (max-width:968px){
+
   .form-box{
     width: auto;
   }
+  .container{
+    padding: 0;
+  } 
+   
 }
+@media only screen and (max-width:500px){
+.container-1{
+    margin: 0;
+    padding: 0;
+  }
+  .container-2{
+    margin: 0;
+    padding: 0;
+    max-width: 100vw;
+  }
 
+}
+.d-t{
+  margin: 10px 15px;
+}
 .file-uploader{
   display: flex;
   align-items: center;

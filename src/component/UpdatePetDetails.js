@@ -83,10 +83,10 @@ function UpdatePetDetails() {
           Pet <span className="text-danger">Details</span>
         </p>
         <hr></hr>
-        <div className="container d-flex flex-row flex-wrap justify-content-center">
+        <div className="container d-flex flex-row flex-wrap justify-content-center container-1">
           <div
-            className="container col-md-11 mx-2 my-4 d-flex flex-row flex-wrap justify-content-evenly mt-5"
-            style={{ maxWidth: "80vw" }}
+            className="container col-md-11 mx-2 my-4 d-flex flex-row flex-wrap justify-content-evenly mt-5 container-2"
+            style={{ maxWidth: "100vw" }}
           >
             <div className="col-md-6 d-flex justify-content-center align-item-center ">
             <img
@@ -96,35 +96,43 @@ function UpdatePetDetails() {
             />
             </div>
             <div className="col-md-6 text-start my-1">
-              <div className="card-body">
-                <p className="h4 fw-normal m-3 ">
-                  Pet Name :  <input type="text" onChange={(ev)=>{ setName(ev.target.value) }} className="form-control" id="petname" value={Name} name="Name" placeholder="" required />
-                </p>
-                <p className="h6 m-3 ">
+              <div className="card-body ">
+                <p className="h6 m-3 mb-4">
                   UID : <span> {Uid}</span>
                 </p>
                 <p className="h6 m-3 ">
-                  Category : <input type="text" onChange={(ev)=>{ setCategory(ev.target.value) }} className="form-control" id="petname" value={Category} name="Category" placeholder="" required />
+                  Pet Name :  <input type="text" onChange={(ev)=>{ setName(ev.target.value) }} className="my-2 form-control" id="petname" value={Name} name="Name" placeholder="" required />
+                </p>
+                
+                <p className="h6 m-3 ">
+                  Category : <input type="text" onChange={(ev)=>{ setCategory(ev.target.value) }} className="my-2 form-control" id="petname" value={Category} name="Category" placeholder="" required />
                 </p>
                 <p className="h6 m-3">
-                  Breed : <input type="text" className="form-control" onChange={(ev)=>{ setBreed(ev.target.value) }} id="petname" value={Breed} name="Breed" placeholder="" required />
+                  Breed : <input type="text" className="my-2 form-control" onChange={(ev)=>{ setBreed(ev.target.value) }} id="petname" value={Breed} name="Breed" placeholder="" required />
                 </p>
 
                 <p className="h6 m-3 ">
-                  Color : <input type="text" className="form-control" onChange={(ev)=>{ setColor(ev.target.value) }} id="petname" name="Color" value={Color} placeholder="" required />
+                  Color : <input type="text" className="my-2 form-control" onChange={(ev)=>{ setColor(ev.target.value) }} id="petname" name="Color" value={Color} placeholder="" required />
                 </p>
-                <p className="h6 m-3">
-                  Gender : <input className="form-check-input" type="radio" onClick={(ev)=>{ setGender("male") }} name="Gender" id="petGenderMale" value="male" checked={Gender==="male"} checked />
+                <p className="h6 m-3 d-flex flex-row align-items-center">
+                  Gender : 
+                  <div className="m-3">
+                  <input className="form-check-input mx-2" type="radio" onClick={(ev)=>{ setGender("male") }} name="Gender" id="petGenderMale" value="male" checked={Gender==="male"} />
                   <label className="form-check-label" htmlFor="petGenderMale">
                     Male
-                  </label>&nbsp;
-                  <input className="form-check-input" type="radio" name="Gender" onClick={(ev)=>{ setGender("female") }} id="petGenderFemale" value="female" checked={Gender==="female"} />
+                  </label>
+                  </div>
+                  <div className="m-3">
+                  <input className="form-check-input mx-2" type="radio" name="Gender" onClick={(ev)=>{ setGender("female") }} id="petGenderFemale" value="female" checked={Gender==="female"} />
                   <label className="form-check-label" htmlFor="petGenderFemale">
                     Female
                   </label>
+                  </div>
                 </p>
-                <p className="h6 m-3">
-                  Vaccinated : <input
+                <p className="h6 m-3 d-flex flex-row align-items-center">
+                  Vaccinated : 
+                  <div className="m-3">
+                    <input
                     className="form-check-input"
                     type="radio"
                     name="Vaccinated"
@@ -133,9 +141,14 @@ function UpdatePetDetails() {
                     onClick={(ev)=>{ setVaccinated(true) }}
                     checked={Vaccinated ===true}
                   />
-                  <label className="form-check-label" htmlFor="vaccinatedYes">
+                  
+                  
+                  <label className="mx-2 form-check-label" htmlFor="vaccinatedYes">
                     Yes
-                  </label>&nbsp;
+                  </label>
+                  </div>
+
+                  <div className="m-3">
                   <input
                     className="form-check-input"
                     type="radio"
@@ -145,24 +158,32 @@ function UpdatePetDetails() {
                     onClick={(ev)=>{ setVaccinated(false) }}
                     checked={Vaccinated ===false}
                   />
-                  <label className="form-check-label" htmlFor="vaccinatedNo">
+                  
+                  <label className="mx-2 form-check-label" htmlFor="vaccinatedNo">
                     No
                   </label>
+                  </div>
                 </p>
                 <p className="h6 m-3">
-                  Age : <input type="number" className="form-control" id="age" name="Age" onChange={(ev)=>{ setAge(ev.target.value) }} value={Age} required />
+                  Age : <input type="number" className="my-2 form-control" id="age" name="Age" onChange={(ev)=>{ setAge(ev.target.value) }} value={Age} required />
+                </p>
+                <p className="h6 mx-3 mt-4 d-flex flex-row align-items-center">
+                    Drop On : 
+                    <div >
+                    <input type="date" className="input-time d-t" id="dropDate" name="DateFrom" onChange={(ev)=>{ setDateFrom(ev.target.value) }} value={DateFrom} required />
+                  <span><input type="time" className="input-time  d-t" id="dropTime" name="TimeFrom" min="10:00" max="15:00" onChange={(ev)=>{ setTimeFrom(ev.target.value) }} value={GetTimeForTimeControl(TimeFrom)} required /></span>
+                  </div>
+                </p>
+                <p className="h6 mx-3 my-4 d-flex flex-row align-items-center">
+                    Pick-Up :
+                    <div> 
+                    <input type="date" className="input-time d-t" id="pickUpDate"  value={DateTo} name="DateTo" onChange={(ev)=>{ setDateTo(ev.target.value) }} required />
+                    <span><input type="time" className="input-time  d-t" id="pickUpTime" name="TimeTo" min="10:00" onChange={(ev)=>{ setTimeTo(ev.target.value) }} value={GetTimeForTimeControl(TimeTo)} max="15:00" required /></span>
+                    </div>
                 </p>
                 <p className="h6 m-3">
-                    Drop On : <input type="date" className="input-time mx-3" id="dropDate" name="DateFrom" onChange={(ev)=>{ setDateFrom(ev.target.value) }} value={DateFrom} required />
-                  <span><input type="time" className="input-time mx-2" id="dropTime" name="TimeFrom" min="10:00" max="15:00" onChange={(ev)=>{ setTimeFrom(ev.target.value) }} value={GetTimeForTimeControl(TimeFrom)} required /></span>
-                </p>
-                <p className="h6 m-3">
-                    Pick-Up : <input type="date" className="input-time mx-3" id="pickUpDate"  value={DateTo} name="DateTo" onChange={(ev)=>{ setDateTo(ev.target.value) }} required />,
-                    <span><input type="time" className="input-time mx-2" id="pickUpTime" name="TimeTo" min="10:00" onChange={(ev)=>{ setTimeTo(ev.target.value) }} value={GetTimeForTimeControl(TimeTo)} max="15:00" required /></span>
-                </p>
-                <p className=" m-3">
-                  <strong> Details : </strong>
-                  <textarea className="form-control col-md-12" value={Details} onClick={(ev)=>{ setDetails(ev.target.value) }} id="exampleFormControlTextarea1" name="Details" rows="3" ></textarea>
+                  Details : 
+                  <textarea className="form-control col-md-12 my-3" value={Details} onClick={(ev)=>{ setDetails(ev.target.value) }} id="exampleFormControlTextarea1" name="Details" rows="3" ></textarea>
                 </p>
                 <p className="card-text mx-3 mt-4">
                   <button type="button" onClick={()=>{OnUpdateClick();}} className="btn btn-outline-primary ">
