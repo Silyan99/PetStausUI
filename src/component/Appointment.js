@@ -348,7 +348,7 @@ function Appointment() {
               ></textarea>
             </div>
 
-            <p className="text-start my-4"> Pet Pick-Up and Drop:</p>
+            <p className="text-start my-4"> Pet Drop off and Pick up details:</p>
             <div className="col-md-6 my-3 text-start">
               <label htmlFor="dropDate" className="mx-0">
                 {" "}
