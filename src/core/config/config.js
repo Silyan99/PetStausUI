@@ -1,7 +1,7 @@
-const BASE_URL="https://3.27.10.229";
+const BASE_URL="https://3.27.10.229/api";
 const config = {
   BaseUrl:BASE_URL,
-  BaseAPI: `${BASE_URL}/api/api/`,
+  BaseAPI: `${BASE_URL}/api/`,
   ToastConfig: {
     position: "top-right",
     autoClose: 3500,
