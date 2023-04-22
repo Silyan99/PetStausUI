@@ -77,8 +77,8 @@ function MyRequests() {
                   })}
                 </>
               ) : (
-                <tr>
-                  <td colSpan={9}>
+                <tr >
+                  <td colSpan={9} className="no-records">
                     <div className="text-center">No records</div>
                   </td>
                 </tr>
