@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { loggedUser, logout } from "../core/authsecurity";
 
 function Navbar(props) {
+  let inputElement = React.useRef(null);
   const logouthandler = () => {
     logout();
   };
@@ -18,6 +19,7 @@ function Navbar(props) {
             PET STAYS
           </Link>
           <button
+            ref={(el) => (inputElement = el)}
             className="border-0 bar-icon"
             type="button"
             data-bs-toggle="collapse"
@@ -28,7 +30,11 @@ function Navbar(props) {
           >
             <span>
               {" "}
-              <img src="../images/menu.png" alt="" style={{ height: "20px" }} />
+              <img
+                src="/../images/menu.png"
+                alt=""
+                style={{ height: "20px" }}
+              />
             </span>
           </button>
 
@@ -37,7 +43,7 @@ function Navbar(props) {
               {/* Visitor Section */}
               {!loggedUser.IsLoggedIn && (
                 <>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={()=>inputElement.click()}>
                     <Link
                       className="nav-link text-center active "
                       aria-current="page"
@@ -46,7 +52,7 @@ function Navbar(props) {
                       Home
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={()=>inputElement.click()}>
                     <Link
                       className="nav-link text-center active "
                       aria-current="page"
@@ -61,7 +67,7 @@ function Navbar(props) {
               {/* Admin Section */}
               {loggedUser.IsLoggedIn && loggedUser.IsAdmin && (
                 <>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={()=>inputElement.click()}>
                     <Link
                       className="nav-link text-center active "
                       aria-current="page"
@@ -70,7 +76,7 @@ function Navbar(props) {
                       My Schedule
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={()=>inputElement.click()}>
                     <Link
                       className="nav-link text-center active "
                       aria-current="page"
@@ -85,7 +91,7 @@ function Navbar(props) {
               {/* Customer section */}
               {loggedUser.IsLoggedIn && loggedUser.IsCustomer && (
                 <>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={()=>inputElement.click()}>
                     <Link
                       className="nav-link text-center active "
                       aria-current="page"
@@ -94,7 +100,7 @@ function Navbar(props) {
                       Appointments
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={()=>inputElement.click()}>
                     <Link
                       className="nav-link text-center active "
                       aria-current="page"
@@ -103,7 +109,7 @@ function Navbar(props) {
                       My Profile
                     </Link>
                   </li>
-                  <li className="nav-item">
+                  <li className="nav-item" onClick={()=>inputElement.click()}>
                     <Link
                       className="nav-link text-center active "
                       aria-current="page"
@@ -151,7 +157,7 @@ function Navbar(props) {
                 </div>
               </>
             ) : (
-              <Link to="/login" className="no-link-underline">
+              <Link to="/login" onClick={()=>inputElement.click()} className="no-link-underline">
                 <span className="navbar-text mx-1 text-end">
                   Login
                   <img

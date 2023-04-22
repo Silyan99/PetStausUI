@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import * as service from "../core/service/service";
 import UrlConstant from "../constants/UrlConstant";
 import { toast } from "react-toastify";
 import config from "../core/config/config";
 import { GetTimeForTimeControl, ValidateAllFields } from "../core/interactiveforms";
+
 function UpdatePetDetails() {
-  let { id } = useParams();
+
+  const { id } = useParams();
   const [Details, setDetails] = useState("");
 
   const [Name,setName]=useState("");
@@ -121,11 +123,11 @@ function UpdatePetDetails() {
         <p className="m-5 px-5 pt-5 display-5">
           Pet <span className="text-danger">Details</span>
         </p>
-        <hr></hr>
+        <hr/>
         <div className="container d-flex flex-row flex-wrap justify-content-center container-1">
           <div
             className="container col-md-11 mx-2 my-4 d-flex flex-row flex-wrap justify-content-evenly mt-5 container-2"
-            style={{ maxWidth: "100vw" }}
+            style={{ maxWidth: "80vw" }}
           >
             <div className="col-md-6 d-flex justify-content-center align-item-center ">
             <img
@@ -249,7 +251,7 @@ function UpdatePetDetails() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
 export default UpdatePetDetails;

@@ -461,7 +461,7 @@ function Appointment() {
                 </div>
                 <div className="modal-body ">
                   <div className="my-2 height-60vh">
-                    <table>
+                    <table className="full-width">
                       <tr>
                         <td>
                           <strong>Date</strong>

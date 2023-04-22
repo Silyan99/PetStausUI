@@ -125,6 +125,7 @@ function SignUp() {
               placeholder="Email"
               onChange={e => setEmail(e.target.value)}
             />
+            <span className="note-text">Note: This email will be used for receiving emails from application</span>
             <input
               className="my-2"
               type="tel"

@@ -5,6 +5,7 @@ import UrlConstant from "../constants/UrlConstant";
 import { toast } from "react-toastify";
 import config from "../core/config/config";
 import { Get12HrsFormat } from "../core/interactiveforms";
+
 function PetDetails() {
   let { id } = useParams();
   const [details, setDetails] = useState({});
@@ -109,11 +110,9 @@ function PetDetails() {
                   </span>
                 </p>
                 <p className="card-text mx-3 mt-4">
-                  <button type="button" className="btn btn-outline-primary" onClick={()=>{
-                    window.location.href=`/customer/updatepetdetails/${id}`;
-                  }}>
+                  <Link to={`/customer/updatedetails/${id}`} className="btn btn-outline-primary">
                     Edit
-                  </button>
+                    </Link>
                   <button
                     type="button"
                     className="btn btn-outline-danger mx-2"
