@@ -67,7 +67,7 @@ function PendingRequest() {
                           {/* todo */}
                           <td className="py-4 px-3">{x.Address}</td>
                           {/* todo */}
-                          <td className="py-4 px-3 text-primary">{x.Status}</td>
+                          <td className="py-4 px-3 text-primary">{x.Status ==='approve' ? "Approved": (x.Status==='pending' ?"Pending":"Rejected") }</td>
                           <td className="py-4 px-3">{x.Remarks || '-'}</td>
                           <td className="py-4 px-3">
                             <Link to={`/admin/editrequest/${x.PetId}`}>

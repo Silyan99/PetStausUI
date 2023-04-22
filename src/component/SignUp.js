@@ -41,6 +41,12 @@ function SignUp() {
         }
       })
       .catch((err) => {
+        if(err.response && err.response.status && err.response.status === 409){
+          toast.error(err.response.data.message,config.ToastConfig);
+        }
+        else{
+          toast.error("Unabe to sign up.Please try again later.",config.ToastConfig);
+        }
         console.log(err);
       });
   };

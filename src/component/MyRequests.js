@@ -59,7 +59,7 @@ function MyRequests() {
                           {/* <td className="py-4  text-center">owner</td> */}
                           <td className="py-4  text-center">{x.Age} Yrs</td>
                           {/* <td className="py-4  text-center">{x.Address}</td> */}
-                          <td className="py-4  text-center">{x.Status}</td>
+                          <td className="py-4  text-center">{x.Status ==='approve' ? "Approved": (x.Status==='pending' ?"Pending":"Rejected") }</td>
                           <td className="py-4  text-center">{x.Remarks}</td>
                           <td className="py-4  text-center">
                             <div className="table-icon">

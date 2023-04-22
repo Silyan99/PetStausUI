@@ -536,7 +536,7 @@ function Appointment() {
                   />
                 </div>
                 <div className="modal-body ">
-                  <div className=" row m-5 d-flex flex-wrap my-5 py-5">
+                  <div className="row m-5 d-flex flex-wrap my-5 py-3">
                     <div className="col-md-3 my-4 ">
                       <div className="card border-1">
                         <div className="card-body text-center ">
@@ -615,6 +615,23 @@ function Appointment() {
                           </p>
                         </div>
                       </div>
+                    </div>
+                    <div className="col-md-12">
+                      <br></br>
+                        <table style={{margin:"0 auto"}}>
+                          <tr>
+                            <td colSpan={2}><strong>Please Make a payment to the below mentioned account:<br/></strong></td>
+                          </tr>
+                          <tr>
+                            <td className="text-start">Bank:</td><td className="text-start">Bank of Nova Scotia</td>
+                          </tr>
+                          <tr>
+                            <td className="text-start">Account Number:</td><td className="text-start">152615261526</td>
+                          </tr>
+                          <tr>
+                            <td className="text-start">Email:</td><td className="text-start">petstays@gmail.com</td>
+                          </tr>
+                        </table>
                     </div>
                   </div>
                 </div>

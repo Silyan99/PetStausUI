@@ -1,6 +1,7 @@
 const UrlConstant = {
   Login: "/PetStays/Login",
   Signup: "/PetStays/SignUpUser",
+  ContactUs:"/PetStays/Contact",
   
   Admin_AllRequests: "/PetStays/GetAllRequest",
   Admin_AddRequest: `/PetStays/AddRequest`,
