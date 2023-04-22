@@ -116,7 +116,7 @@ function Admin() {
               <p className="h6 m-3">
                 Drop :{" "}
                 <span>
-                  {new Date(petDetails.Date).toDateString() +
+                  {new Date(petDetails.DateFrom).toDateString() +
                     " " +
                     Get12HrsFormat(petDetails.TimeFrom)}
                 </span>
@@ -125,7 +125,7 @@ function Admin() {
                 {/* Set PickUp/Drop Date  todo*/}
                 Pick-Up :{" "}
                 <span>
-                  {new Date(petDetails.Date).toDateString() +
+                  {new Date(petDetails.DateTo).toDateString() +
                     " " +
                     Get12HrsFormat(petDetails.TimeTo)}
                 </span>

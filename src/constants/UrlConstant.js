@@ -11,7 +11,7 @@ const UrlConstant = {
   Admin_UpdatePetDetail: (id) => `/PetStays/Request/${id}`,
 
   Customer_DeleteRequest: (id) => `/PetStays/DeleteRequest/${id}`,
-  Customer_UpdateRequest: (id) => `/PetStays/UpdateRequest/${id}`,
+  Customer_UpdateRequest: (id) => `/PetStays/UpdatePetRequest/${id}`,
   Customer_OffTimingsAdmin: (Id) => `/PetStays/GetAvailabilityForCustomer/${Id}`,
   Customer_AllRequests: `/PetStays/GetAllUserRequest`,
   Customer_GetRequestDetailURL: (id) => `/PetStays/GetRequest/${id}`,

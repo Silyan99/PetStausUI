@@ -68,7 +68,7 @@ function PendingRequest() {
                           <td className="py-4 px-3">{x.Address}</td>
                           {/* todo */}
                           <td className="py-4 px-3 text-primary">{x.Status}</td>
-                          <td className="py-4 px-3">{x.Remarks}</td>
+                          <td className="py-4 px-3">{x.Remarks || '-'}</td>
                           <td className="py-4 px-3">
                             <Link to={`/admin/editrequest/${x.PetId}`}>
                               <div className="table-icon">

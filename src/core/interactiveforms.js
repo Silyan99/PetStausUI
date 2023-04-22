@@ -1,3 +1,6 @@
+import { toast } from "react-toastify";
+import config from "./config/config";
+
 const clearForm = (form) => {
   var properties = Object.keys(form);
   for (let index = 0; index < properties.length; index++) {
@@ -9,13 +12,42 @@ const clearForm = (form) => {
   }
 };
 
+const ValidateAllFields=(data)=>{
+  var propertiesArr = Object.keys(data);
+  var isValid = true;
+  for (let index = 0; index < propertiesArr.length; index++) {
+    if(propertiesArr[index]!=='PhotoFile' && IsNullEmptyOfUndefined(data[propertiesArr[index]])){
+      toast.error(`${propertiesArr[index]} is required`,config.ToastConfig);
+      isValid = false;
+      break;
+    }
+  }
+  return isValid;
+}
+
+const CheckTyped=(value)=>{
+  switch (typeof(value)) {
+    case 'number':
+      return value !== 0;
+    case 'string':
+      return value.trim() !== "";     
+    case 'object':
+      return Object.keys(value).length > 0;
+    case "boolean":
+      return true;
+    default:
+      return false;
+  }
+}
+
 const FormsOperations = {
   clearForm,
 };
 
 const IsNullEmptyOfUndefined =(value)=>{
-  return !(value && value.trim() !== "");
+  return !(value && CheckTyped(value));
 }
+
 const Get12HrsFormat = (timeString) => {
   return new Date("1970-01-01T" + timeString + "Z").toLocaleTimeString(
     "en-US",
@@ -47,4 +79,4 @@ const RandomString =(length)=> {
   return result;
 }
 
-export { FormsOperations,IsNullEmptyOfUndefined,Get12HrsFormat,ValidateEmail,RandomString,GetTimeForTimeControl};
+export { FormsOperations,IsNullEmptyOfUndefined,Get12HrsFormat,ValidateEmail,RandomString, GetTimeForTimeControl,ValidateAllFields};
